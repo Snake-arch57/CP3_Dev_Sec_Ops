@@ -1,0 +1,44 @@
+name: Deploy na VM (homologação)
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-vm-homologacao
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, linux, x64, cyberguard-deploy]
+    environment: homologacao
+    timeout-minutes: 60
+    steps:
+      - name: Atualizar clone e publicar containers
+        shell: bash
+        env:
+          VM_DEPLOY_PATH: ${{ vars.VM_DEPLOY_PATH }}
+        run: |
+          set -euo pipefail
+
+          : "${VM_DEPLOY_PATH:?Configure a variável de repositório VM_DEPLOY_PATH}"
+          [[ "$VM_DEPLOY_PATH" = /* ]] || { echo "VM_DEPLOY_PATH precisa ser absoluto"; exit 1; }
+          git -C "$VM_DEPLOY_PATH" rev-parse --is-inside-work-tree >/dev/null
+          branch="$(git -C "$VM_DEPLOY_PATH" branch --show-current)"
+          [[ "$branch" == "main" ]] || { echo "O clone precisa estar na branch main (atual: $branch)"; exit 1; }
+          [[ -z "$(git -C "$VM_DEPLOY_PATH" status --porcelain)" ]] || {
+            echo "O clone tem alterações rastreadas locais; resolva-as antes do deploy"; exit 1;
+          }
+
+          git -C "$VM_DEPLOY_PATH" fetch --no-tags origin main
+          git -C "$VM_DEPLOY_PATH" cat-file -e "$GITHUB_SHA^{commit}"
+          git -C "$VM_DEPLOY_PATH" reset --hard "$GITHUB_SHA"
+          cd "$VM_DEPLOY_PATH"
+
+          test -f apps/api/.env || { echo "Crie apps/api/.env na VM antes do deploy"; exit 1; }
+          docker compose build
+          docker compose run --rm api pnpm --filter api prisma:migrate
+          docker compose up -d --remove-orphans
