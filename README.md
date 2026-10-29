@@ -26,6 +26,10 @@ treina — e cada linguagem serve ao seu fim. Isso está documentado em detalhe 
 
 ---
 
+## Deploy na VM
+
+O deploy automático em homologação via Docker Compose está descrito em [docs/deploy-vm.md](docs/deploy-vm.md).
+
 ## Como rodar
 
 Requer Node 24 (veja `.nvmrc`) e pnpm.
