@@ -1,0 +1,19 @@
+[Unit]
+Description=CyberGuard Leroy Merlin - Next.js web (Sele Sistemas)
+After=network.target
+
+[Service]
+Type=simple
+User=cyberguard
+Group=cyberguard
+WorkingDirectory=/opt/leroy-cyber-game/apps/web
+Environment=NODE_ENV=production
+Environment=PORT=3002
+ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -p 3002
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,130 @@
+[
+  {
+    "id": "arc-01",
+    "sender": "Leroy Merlin IT <suporte@leroymerlin-ti.com.br>",
+    "subject": "Your password expires in 2 hours, click to renew",
+    "isPhishing": true,
+    "concept": "phishing",
+    "explanation": "The address 'leroymerlin-ti.com.br' is not the company's official one."
+  },
+  {
+    "id": "arc-02",
+    "sender": "Leroy Merlin HR <rh@leroymerlin.com.br>",
+    "subject": "2026 workplace climate survey",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Official address, no pressure and no request for data."
+  },
+  {
+    "id": "arc-03",
+    "sender": "Microsoft Account <security@micros0ft-verify.com>",
+    "subject": "Unusual activity detected on your account",
+    "isPhishing": true,
+    "concept": "microsoft_falso",
+    "explanation": "'micros0ft' uses a zero in place of the 'o'. A fake address."
+  },
+  {
+    "id": "arc-04",
+    "sender": "Finance Department <diretoria@leroymerlin-corp.com>",
+    "subject": "Urgent wire transfer before 6pm, I'll call right after",
+    "isPhishing": true,
+    "concept": "pix_falso",
+    "explanation": "A request for an urgent bank transfer by email, with no process: the fake-payment scam."
+  },
+  {
+    "id": "arc-05",
+    "sender": "Constrular Supplier <financeiro@constrular-materiais.com.br>",
+    "subject": "Invoice for order 4521",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Known supplier, no request to change banking details."
+  },
+  {
+    "id": "arc-06",
+    "sender": "WhatsApp <notificacoes@whatsapp-web-alerta.com>",
+    "subject": "New message awaiting session confirmation",
+    "isPhishing": true,
+    "concept": "whatsapp_falso",
+    "explanation": "WhatsApp doesn't notify you from a random address like this."
+  },
+  {
+    "id": "arc-09",
+    "sender": "Training Dept <treinamentos@leroymerlin.com.br>",
+    "subject": "Registration open for the leadership course",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Official address, no suspicious link or pressure."
+  },
+  {
+    "id": "arc-10",
+    "sender": "Eletrotech Supplier <financeiro@eletrotech-suprimentos.com.br>",
+    "subject": "Urgent update to banking details",
+    "isPhishing": true,
+    "concept": "fornecedor_comprometido",
+    "explanation": "Changing bank details by email alone, with no formal confirmation, is a sign of a compromised account."
+  },
+  {
+    "id": "arc-12",
+    "sender": "ABC Supplier Finance <financeiro@fornecedorabc.com>",
+    "subject": "Invoice 2854 attached",
+    "isPhishing": true,
+    "concept": "anexo_perigoso",
+    "explanation": "A real supplier can also send a dangerous attachment disguised as an invoice."
+  },
+  {
+    "id": "arc-13",
+    "sender": "Operations <operacoes@leroymerlin.com.br>",
+    "subject": "Agenda for the monthly operations meeting",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Routine notice, official address, and no suspicious attachment."
+  },
+  {
+    "id": "arc-14",
+    "sender": "Corporate IT <ti@suporte-corporativo-ti.com>",
+    "subject": "Temporarily disable your two-factor verification",
+    "isPhishing": true,
+    "concept": "mfa",
+    "explanation": "A real IT team never asks you to turn off two-step verification."
+  },
+  {
+    "id": "arc-15",
+    "sender": "Marcos (Store 12) <marcos.loja12@gmail.com>",
+    "subject": "Found a flash drive, check out the photos attached",
+    "isPhishing": true,
+    "concept": "usb_infectado",
+    "explanation": "The classic lost-USB lure, now arriving straight by email."
+  },
+  {
+    "id": "arc-16",
+    "sender": "Sales <vendas@leroymerlin.com.br>",
+    "subject": "Quarterly targets updated on the dashboard",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Normal internal notice, no suspicious link or attachment."
+  },
+  {
+    "id": "arc-18",
+    "sender": "Information Security <seguranca@leroymerlin.com.br>",
+    "subject": "Reminder: mandatory security training",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Official address and content that fits the department."
+  },
+  {
+    "id": "arc-21",
+    "sender": "Executive Office <ceo@leroymerlin-diretoria.com>",
+    "subject": "I need you to buy 3 gift cards right now, keep it confidential",
+    "isPhishing": true,
+    "concept": "bec",
+    "explanation": "An odd, secret request from an 'executive' is the mark of the fake-payment scam."
+  },
+  {
+    "id": "arc-22",
+    "sender": "Loyalty Program <premios@sorteio-vip-brasil.xyz>",
+    "subject": "Scan the QR Code and claim your prize",
+    "isPhishing": true,
+    "concept": "qr_falso",
+    "explanation": "Unknown '.xyz' address and a prize from nowhere: a QR code lure."
+  }
+]

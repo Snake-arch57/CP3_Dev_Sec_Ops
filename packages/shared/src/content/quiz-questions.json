@@ -1,0 +1,170 @@
+[
+  {
+    "id": "quiz-01",
+    "question": "Um email pede que você clique em um link para 'evitar o bloqueio da conta em 24 horas'. O que isso indica?",
+    "options": [
+      "É sempre legítimo, contas realmente bloqueiam rápido",
+      "A pressa forçada é uma técnica clássica de golpe",
+      "Só é golpe se vier de alguém desconhecido",
+      "Não indica nada, é só um estilo de escrita"
+    ],
+    "correctIndex": 1,
+    "concept": "engenharia_social",
+    "difficulty": 1,
+    "explanation": "Criar pressa para você agir sem pensar é uma tática clássica de golpe."
+  },
+  {
+    "id": "quiz-03",
+    "question": "Você recebe um pedido de PIX urgente do 'diretor financeiro' por email, pedindo sigilo. O que fazer?",
+    "options": [
+      "Fazer o PIX rapidamente para não incomodar a diretoria",
+      "Responder o email pedindo mais detalhes",
+      "Confirmar por outro canal (telefone conhecido) antes de qualquer pagamento",
+      "Encaminhar para um colega decidir"
+    ],
+    "correctIndex": 2,
+    "concept": "pix_falso",
+    "difficulty": 3,
+    "explanation": "Pedido de pagamento urgente e secreto é a cara do golpe do pagamento falso — sempre confirme por outro canal."
+  },
+  {
+    "id": "quiz-04",
+    "question": "Por que nunca se deve desligar a confirmação em duas etapas a pedido de um e-mail?",
+    "options": [
+      "Porque a confirmação em duas etapas é opcional e não faz diferença",
+      "Porque isso remove uma das principais proteções contra invasão de contas",
+      "Porque só funciona em celulares Android",
+      "Porque desligar a confirmação em duas etapas é ilegal"
+    ],
+    "correctIndex": 1,
+    "concept": "mfa",
+    "difficulty": 2,
+    "explanation": "A confirmação em duas etapas é uma das melhores defesas contra invasão — equipe de TI de verdade nunca pede para desligá-la."
+  },
+  {
+    "id": "quiz-05",
+    "question": "Um arquivo chamado 'nota_fiscal.pdf.exe' foi enviado como anexo. O que isso indica?",
+    "options": [
+      "É um PDF protegido por senha",
+      "São dois nomes de arquivo colados, escondendo um programa perigoso",
+      "É um formato válido de compactação",
+      "Não há nada de errado, é só um nome longo"
+    ],
+    "correctIndex": 1,
+    "concept": "anexo_perigoso",
+    "difficulty": 1,
+    "explanation": "O arquivo termina em '.exe', que quer dizer programa. O '.pdf' antes disso está lá só para enganar."
+  },
+  {
+    "id": "quiz-06",
+    "question": "O cadeado (conexão segura) em um site significa que:",
+    "options": [
+      "O site é 100% confiável e seguro",
+      "A conversa com o site vai embaralhada, mas isso não diz se o site é honesto",
+      "O site pertence ao governo",
+      "Não existem golpes possíveis nesse site"
+    ],
+    "correctIndex": 1,
+    "concept": "phishing",
+    "difficulty": 3,
+    "explanation": "O cadeado só garante que a conexão é segura — site falso também pode ter cadeado."
+  },
+  {
+    "id": "quiz-07",
+    "question": "Você encontra um pendrive desconhecido no estacionamento da empresa. O que fazer?",
+    "options": [
+      "Conectar no seu computador para ver o que tem",
+      "Entregar para a equipe de TI sem conectar em nenhum dispositivo",
+      "Levar para casa e verificar com calma",
+      "Deixar onde estava"
+    ],
+    "correctIndex": 1,
+    "concept": "usb_infectado",
+    "difficulty": 2,
+    "explanation": "Pendrives desconhecidos podem estar infectados propositalmente — nunca conecte, entregue à TI."
+  },
+  {
+    "id": "quiz-09",
+    "question": "Um fornecedor real e confiável pede, só por email, para trocar os dados bancários de pagamento. O que isso pode indicar?",
+    "options": [
+      "É rotina, fornecedores trocam de banco o tempo todo",
+      "A conta de email do fornecedor pode ter sido comprometida",
+      "Não há risco, já que o fornecedor é conhecido",
+      "É preciso responder imediatamente confirmando"
+    ],
+    "correctIndex": 1,
+    "concept": "fornecedor_comprometido",
+    "difficulty": 3,
+    "explanation": "Mesmo fornecedores reais podem ter contas de email invadidas — confirme mudanças bancárias por telefone."
+  },
+  {
+    "id": "quiz-10",
+    "question": "Antes de escanear um QR Code desconhecido, o que é recomendado?",
+    "options": [
+      "Escanear e ver o que acontece",
+      "Ver para onde o link leva de verdade antes de abrir",
+      "Compartilhar com um colega primeiro",
+      "QR Codes são sempre seguros"
+    ],
+    "correctIndex": 1,
+    "concept": "qr_falso",
+    "difficulty": 1,
+    "explanation": "É possível pré-visualizar o link de um QR Code antes de acessá-lo, evitando golpes disfarçados."
+  },
+  {
+    "id": "quiz-12",
+    "question": "Por que um endereço como 'microsoft-suporte-verificacao.com' deve gerar desconfiança?",
+    "options": [
+      "Porque é muito longo",
+      "Porque não é o endereço oficial da Microsoft, só tem a palavra 'microsoft' dentro",
+      "Porque usa hífen",
+      "Endereços assim são sempre de parceiros de verdade"
+    ],
+    "correctIndex": 1,
+    "concept": "microsoft_falso",
+    "difficulty": 2,
+    "explanation": "Ter o nome de uma marca não torna um endereço oficial — qualquer um pode criar endereços assim."
+  },
+  {
+    "id": "quiz-13",
+    "question": "Qual é a melhor prática ao receber um boleto por email, mesmo de um fornecedor conhecido?",
+    "options": [
+      "Pagar imediatamente para evitar juros",
+      "Conferir o beneficiário e os dados bancários antes de pagar",
+      "Encaminhar para o financeiro sem checar nada",
+      "Ignorar sempre boletos por email"
+    ],
+    "correctIndex": 1,
+    "concept": "boleto_adulterado",
+    "difficulty": 3,
+    "explanation": "Boletos podem ter o beneficiário adulterado mesmo vindo de um fornecedor real — sempre confira antes de pagar."
+  },
+  {
+    "id": "quiz-15",
+    "question": "Qual dessas é uma boa prática de senha?",
+    "options": [
+      "Usar a mesma senha em todos os sistemas para não esquecer",
+      "Usar senhas longas e únicas por serviço, idealmente com um gerenciador de senhas",
+      "Trocar '123456' por 'senha123' de vez em quando",
+      "Compartilhar a senha só com colegas de confiança"
+    ],
+    "correctIndex": 1,
+    "concept": "senha_fraca",
+    "difficulty": 1,
+    "explanation": "Senhas únicas e longas por serviço, geridas por um gerenciador, reduzem drasticamente o risco de invasão em cadeia."
+  },
+  {
+    "id": "quiz-18",
+    "question": "O que fazer ao suspeitar que um e-mail é golpe, mesmo sem ter certeza total?",
+    "options": [
+      "Apagar sem contar para ninguém",
+      "Avisar o time de segurança da empresa",
+      "Responder para quem mandou, perguntando se é verdade",
+      "Encaminhar para vários colegas perguntando a opinião deles"
+    ],
+    "correctIndex": 1,
+    "concept": "phishing",
+    "difficulty": 1,
+    "explanation": "Reportar permite que a equipe de segurança analise e proteja outros colaboradores do mesmo golpe."
+  }
+]

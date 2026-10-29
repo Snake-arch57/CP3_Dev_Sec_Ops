@@ -1,0 +1,281 @@
+{
+  "id": "day-05",
+  "dayNumber": 5,
+  "title": "Pressure and urgency",
+  "description": "Audio, video, and phone calls are now part of the scam. The more someone tries to rush you, the more it matters to stop and verify.",
+  "difficultyRange": [5, 5],
+  "timeLimitSeconds": 330,
+  "isBossDay": false,
+  "events": [
+    {
+      "id": "d5-ev1",
+      "type": "boss_call",
+      "triggerAfterEmailIndex": 1,
+      "durationSeconds": 6,
+      "message": "'I need you to approve a transfer RIGHT NOW, I'm in a meeting, I'll explain later.' — message from your manager.",
+      "effect": { "kind": "ui_distraction", "variant": "boss_popup" }
+    }
+  ],
+  "emails": [
+    {
+      "id": "d5-e01",
+      "dayId": "day-05",
+      "order": 1,
+      "subject": "Urgent confirmation - PIX transfer for the acquisition",
+      "bodyHtml": "<p>Attached is the screenshot from our video call just now confirming the details.</p><p>Please make the PIX transfer of R$48,000 to the key below today. This is confidential until the official announcement of the acquisition on Friday.</p><p>PIX key: 45.812.finance@fastpay.com.br</p>",
+      "sender": {
+        "displayName": "Carla Mendes - CFO",
+        "emailAddressRaw": "carla.mendes@leroymerlin.corp-mail.com",
+        "domain": "leroymerlin.corp-mail.com",
+        "isSpoofed": true,
+        "spoofType": "subdomain_trick"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d5-e01-att1",
+          "fileName": "videocall_confirmation.jpg",
+          "declaredExtension": ".jpg",
+          "actualType": "image/jpeg",
+          "sizeKB": 210,
+          "hasMacro": false,
+          "isMalicious": false
+        }
+      ],
+      "headers": {
+        "fromServer": "mail.corp-mail.com",
+        "sourceIp": "103.42.18.90",
+        "spf": "fail",
+        "dkim": "none",
+        "dmarc": "fail",
+        "sentAt": "2026-08-11T09:10:00Z",
+        "routeHops": ["103.42.18.90"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "never_used",
+        "notes": "'leroymerlin.corp-mail.com' is not the company's: it belongs to 'corp-mail.com', an outside service."
+      },
+      "outOfBandCheck": {
+        "channelDescription": "Call to CFO Carla Mendes's registered extension",
+        "outcome": "confirmed_fraud",
+        "details": "The CFO confirmed that no video call took place and that there is no acquisition underway."
+      },
+      "aiAssistantHint": {
+        "phishingProbability": 45,
+        "isReliable": false,
+        "reasoning": "The formal wording and the attached image appear legitimate. The AI doesn't analyze video/audio or verify identity through other means."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "deepfake",
+      "tags": ["deepfake", "pix_falso", "bec"],
+      "difficulty": 5,
+      "investigationHints": [
+        {
+          "toolId": "domain_inspect",
+          "revealsField": "sender.domain",
+          "summaryText": "'leroymerlin.corp-mail.com' belongs to 'corp-mail.com', an outside service. The company name is only at the start."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "This sender has never been used before to communicate with the company."
+        },
+        {
+          "toolId": "out_of_band_verify",
+          "revealsField": "outOfBandCheck",
+          "summaryText": "The real CFO, contacted by phone, confirmed that neither the video call nor the acquisition exists."
+        }
+      ],
+      "explanation": {
+        "short": "A lookalike address plus a fake video call image, to make a payment request look real.",
+        "detailed": "'leroymerlin.corp-mail.com' looks like it has 'leroymerlin' in the name, but the real address is 'corp-mail.com' — the company shows up only as decoration, to fool a quick reader. The attached 'confirmation' is just an image, easy to fake. An urgent, secret transfer request that bypasses the normal process is the fake-payment scam in a boss's name. The only real defense is to confirm through another channel, like calling the number you already have for the person.",
+        "conceptGlossaryId": "deepfake"
+      },
+      "idealInvestigationSeconds": 16
+    },
+    {
+      "id": "d5-e03",
+      "dayId": "day-05",
+      "order": 2,
+      "subject": "Your two-step verification code",
+      "bodyHtml": "<p>Hello,</p><p>We received a login attempt on your corporate account from a new device.</p><p>If this was you, use the code <strong>482913</strong> to confirm access. If you don't recognize this attempt, ignore this email and your account will remain secure.</p>",
+      "sender": {
+        "displayName": "Account Security - Leroy Merlin",
+        "emailAddressRaw": "seguranca@leroymerlin.com.br",
+        "domain": "leroymerlin.com.br",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [],
+      "attachments": [],
+      "headers": {
+        "fromServer": "mail.leroymerlin.com.br",
+        "sourceIp": "179.94.10.5",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-08-11T11:30:00Z",
+        "routeHops": ["179.94.10.5"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "trusted_vendor",
+        "notes": "The company's official address. It is the system that sends access codes."
+      },
+      "riskLevel": "safe",
+      "correctAction": "accept",
+      "primaryConcept": "legitimo",
+      "tags": ["mfa", "legitimo"],
+      "difficulty": 5,
+      "investigationHints": [
+        {
+          "toolId": "sender_address",
+          "revealsField": "sender.domain",
+          "summaryText": "It comes from the company's official address, spelled correctly, with no swapped letters."
+        },
+        {
+          "toolId": "header_inspect",
+          "revealsField": "headers",
+          "summaryText": "The automatic checks matched: the email really did come from the company's system."
+        }
+      ],
+      "explanation": {
+        "short": "A real two-step verification alert, from the official address, with a safe option to ignore it.",
+        "detailed": "Unlike a scam, this email doesn't ask you to click anything or rush you. It just gives a code and explains what to do if you don't recognize the sign-in. The address and the email's checks confirm it's real. A real two-step verification alert works like this: it informs, has no link, and gives a safe way out for anyone who doesn't recognize the sign-in.",
+        "conceptGlossaryId": "mfa"
+      },
+      "idealInvestigationSeconds": 8
+    },
+    {
+      "id": "d5-e04",
+      "dayId": "day-05",
+      "order": 3,
+      "subject": "Fwd: Fwd: OPPORTUNITY - payroll loan approved",
+      "bodyHtml": "<p>Good morning everyone, I got this in the company WhatsApp group and it's being forwarded to everybody, here's the link:</p><p>Payroll loan approved with no credit check, approval in 5 minutes, click to see your exclusive employee terms.</p>",
+      "sender": {
+        "displayName": "Ana (HR - WhatsApp group)",
+        "emailAddressRaw": "ana.rh.grupowpp@hotmail.com",
+        "domain": "hotmail.com",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [
+        {
+          "id": "d5-e04-link1",
+          "displayText": "See exclusive terms",
+          "actualUrl": "http://emprestimo-facil-colaborador.net/oferta",
+          "isMalicious": true
+        }
+      ],
+      "attachments": [],
+      "headers": {
+        "fromServer": "smtp.hotmail.com",
+        "sourceIp": "40.97.110.20",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "none",
+        "sentAt": "2026-08-11T13:00:00Z",
+        "routeHops": ["40.97.110.20"]
+      },
+      "riskLevel": "suspicious",
+      "correctAction": "report",
+      "primaryConcept": "whatsapp_falso",
+      "tags": ["whatsapp_falso", "phishing", "engenharia_social"],
+      "difficulty": 5,
+      "investigationHints": [
+        {
+          "toolId": "link_hover",
+          "revealsField": "links[0].actualUrl",
+          "summaryText": "The link leads to a random financial-scam address, unrelated to any real bank."
+        },
+        {
+          "toolId": "domain_inspect",
+          "revealsField": "sender.domain",
+          "summaryText": "Sent from a personal Hotmail account forwarding a chain message, not from an official HR channel."
+        }
+      ],
+      "explanation": {
+        "short": "Financial scam chain message forwarded through a personal email, with no specific target within the company.",
+        "detailed": "This is a classic mass scam — 'easy loan, no credit check' is a generic lure that circulates through WhatsApp groups and gets forwarded, often by well-meaning people who didn't notice the scam. Unlike the previous scams, this one wasn't built for the company and doesn't use Leroy Merlin's systems. It is still a scam: mark it as one and, above all, don't forward it to anyone.",
+        "conceptGlossaryId": "whatsapp_falso"
+      },
+      "idealInvestigationSeconds": 8
+    },
+    {
+      "id": "d5-e05",
+      "dayId": "day-05",
+      "order": 4,
+      "subject": "Updated invoice - new payee starting this month",
+      "bodyHtml": "<p>Dear all,</p><p>We would like to inform you that, due to a corporate restructuring, our payments will now be received under a new company name. Please find the updated invoice attached with the new bank details.</p>",
+      "sender": {
+        "displayName": "Vendor ABC Finance",
+        "emailAddressRaw": "financeiro@fornecedorabc.com",
+        "domain": "fornecedorabc.com",
+        "isSpoofed": false,
+        "spoofType": "compromised_legit"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d5-e05-att1",
+          "fileName": "updated_invoice_august.pdf",
+          "declaredExtension": ".pdf",
+          "actualType": "application/pdf",
+          "sizeKB": 96,
+          "hasMacro": false,
+          "isMalicious": false
+        }
+      ],
+      "certificate": {
+        "companyName": "Fornecedor ABC LTDA",
+        "issuer": "Let's Encrypt",
+        "validFrom": "2026-06-01T00:00:00Z",
+        "validTo": "2026-09-01T00:00:00Z",
+        "domain": "fornecedorabc.com",
+        "isTechnicallyValid": true,
+        "isTrustworthy": false
+      },
+      "headers": {
+        "fromServer": "mail.fornecedorabc.com",
+        "sourceIp": "201.45.12.9",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-08-11T14:20:00Z",
+        "routeHops": ["201.45.12.9"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "trusted_vendor",
+        "notes": "Legitimate vendor account, but no corporate restructuring was previously communicated through official channels."
+      },
+      "outOfBandCheck": {
+        "channelDescription": "Call to Vendor ABC's already-known finance contact",
+        "outcome": "confirmed_fraud",
+        "details": "The vendor confirmed that no restructuring took place and that their email account was recently compromised."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "boleto_adulterado",
+      "tags": ["boleto_adulterado", "fornecedor_comprometido", "bec"],
+      "difficulty": 5,
+      "investigationHints": [
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "No corporate restructuring was previously communicated through official channels — a payee change with no advance notice is a red flag."
+        },
+        {
+          "toolId": "out_of_band_verify",
+          "revealsField": "outOfBandCheck",
+          "summaryText": "The vendor confirmed by phone that their email account was compromised and that no restructuring took place."
+        }
+      ],
+      "explanation": {
+        "short": "The vendor's real account was compromised to swap the invoice's bank details.",
+        "detailed": "This is the 'swapped invoice' scam at its worst: the email really does come from the vendor's real account (which is why the checks pass), because the account was hacked. A change of payment account, with no notice through the usual channel, is always a reason to confirm outside of email before paying. It was that confirmation that exposed the scam.",
+        "conceptGlossaryId": "boleto_adulterado"
+      },
+      "idealInvestigationSeconds": 14
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+[
+  {
+    "id": "arc-01",
+    "sender": "TI Leroy Merlin <suporte@leroymerlin-ti.com.br>",
+    "subject": "Sua senha expira em 2 horas, clique para renovar",
+    "isPhishing": true,
+    "concept": "phishing",
+    "explanation": "O endereço 'leroymerlin-ti.com.br' não é o oficial da empresa."
+  },
+  {
+    "id": "arc-02",
+    "sender": "RH Leroy Merlin <rh@leroymerlin.com.br>",
+    "subject": "Pesquisa de clima organizacional 2026",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Endereço oficial, sem pressa e sem pedir dados."
+  },
+  {
+    "id": "arc-03",
+    "sender": "Microsoft Account <security@micros0ft-verify.com>",
+    "subject": "Atividade incomum detectada na sua conta",
+    "isPhishing": true,
+    "concept": "microsoft_falso",
+    "explanation": "'micros0ft' usa zero no lugar do 'o'. Endereço falso."
+  },
+  {
+    "id": "arc-04",
+    "sender": "Diretoria Financeira <diretoria@leroymerlin-corp.com>",
+    "subject": "PIX urgente antes das 18h, ligo em seguida",
+    "isPhishing": true,
+    "concept": "pix_falso",
+    "explanation": "Pedido de PIX urgente por e-mail, sem processo: é o golpe do pagamento falso."
+  },
+  {
+    "id": "arc-05",
+    "sender": "Fornecedor Constrular <financeiro@constrular-materiais.com.br>",
+    "subject": "Boleto referente ao pedido 4521",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Fornecedor conhecido, sem pedido de troca de dados bancários."
+  },
+  {
+    "id": "arc-06",
+    "sender": "WhatsApp <notificacoes@whatsapp-web-alerta.com>",
+    "subject": "Nova mensagem aguardando confirmação de sessão",
+    "isPhishing": true,
+    "concept": "whatsapp_falso",
+    "explanation": "O WhatsApp não avisa por um endereço qualquer como esse."
+  },
+  {
+    "id": "arc-09",
+    "sender": "Treinamentos <treinamentos@leroymerlin.com.br>",
+    "subject": "Inscrições abertas para o curso de liderança",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Endereço oficial, sem link suspeito nem pressa."
+  },
+  {
+    "id": "arc-10",
+    "sender": "Fornecedor Eletrotech <financeiro@eletrotech-suprimentos.com.br>",
+    "subject": "Atualização urgente de dados bancários",
+    "isPhishing": true,
+    "concept": "fornecedor_comprometido",
+    "explanation": "Troca de dados bancários só por email, sem confirmação formal — sinal de conta comprometida."
+  },
+  {
+    "id": "arc-12",
+    "sender": "Financeiro Fornecedor ABC <financeiro@fornecedorabc.com>",
+    "subject": "Nota fiscal 2854 em anexo",
+    "isPhishing": true,
+    "concept": "anexo_perigoso",
+    "explanation": "Fornecedor de verdade também pode mandar anexo perigoso disfarçado de nota fiscal."
+  },
+  {
+    "id": "arc-13",
+    "sender": "Operações <operacoes@leroymerlin.com.br>",
+    "subject": "Pauta da reunião mensal de operações",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Comunicado de rotina, endereço oficial e sem anexo suspeito."
+  },
+  {
+    "id": "arc-14",
+    "sender": "TI Corporativo <ti@suporte-corporativo-ti.com>",
+    "subject": "Desative sua verificação em duas etapas temporariamente",
+    "isPhishing": true,
+    "concept": "mfa",
+    "explanation": "Equipe de TI de verdade nunca pede para desligar a confirmação em duas etapas."
+  },
+  {
+    "id": "arc-15",
+    "sender": "Marcos (Loja 12) <marcos.loja12@gmail.com>",
+    "subject": "Achei um pendrive, dá uma olhada nas fotos em anexo",
+    "isPhishing": true,
+    "concept": "usb_infectado",
+    "explanation": "Isca clássica de USB perdido, agora chegando direto por email."
+  },
+  {
+    "id": "arc-16",
+    "sender": "Vendas <vendas@leroymerlin.com.br>",
+    "subject": "Metas do trimestre atualizadas no painel",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Comunicado interno normal, sem link ou anexo suspeito."
+  },
+  {
+    "id": "arc-18",
+    "sender": "Segurança da Informação <seguranca@leroymerlin.com.br>",
+    "subject": "Lembrete: treinamento de segurança obrigatório",
+    "isPhishing": false,
+    "concept": "legitimo",
+    "explanation": "Endereço oficial e conteúdo que combina com a área."
+  },
+  {
+    "id": "arc-21",
+    "sender": "Diretoria <ceo@leroymerlin-diretoria.com>",
+    "subject": "Preciso que você compre 3 cartões-presente agora, é sigiloso",
+    "isPhishing": true,
+    "concept": "bec",
+    "explanation": "Pedido estranho e secreto de um 'executivo' é a cara do golpe do pagamento falso."
+  },
+  {
+    "id": "arc-22",
+    "sender": "Programa de Fidelidade <premios@sorteio-vip-brasil.xyz>",
+    "subject": "Escaneie o QR Code e resgate seu prêmio",
+    "isPhishing": true,
+    "concept": "qr_falso",
+    "explanation": "Endereço '.xyz' desconhecido e prêmio do nada: isca de QR Code."
+  }
+]

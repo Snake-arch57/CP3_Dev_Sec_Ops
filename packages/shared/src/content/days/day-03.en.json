@@ -1,0 +1,222 @@
+{
+  "id": "day-03",
+  "dayNumber": 3,
+  "title": "The scams get sophisticated",
+  "description": "Addresses almost identical to the real one, urgent transfers, swapped invoices and a hacked supplier. Nothing is what it seems.",
+  "difficultyRange": [3, 3],
+  "timeLimitSeconds": 360,
+  "isBossDay": false,
+  "events": [
+    {
+      "id": "d3-evt-slow",
+      "type": "slow_internet",
+      "triggerAfterEmailIndex": 3,
+      "durationSeconds": 10,
+      "message": "The store's internet is slow today — every second counts even more.",
+      "effect": { "kind": "timer_penalty", "seconds": 20 }
+    }
+  ],
+  "emails": [
+    {
+      "id": "d3-e02",
+      "dayId": "day-03",
+      "order": 1,
+      "subject": "URGENT: I need you to send a PIX transfer now",
+      "bodyHtml": "<p>I'm in a meeting with an important vendor and need to close a payment now via PIX so we don't lose the special deal. Confirm with me once you've done it, I'll explain later. Key: 47.xxx.xxx/0001-xx</p>",
+      "sender": {
+        "displayName": "Finance Management",
+        "emailAddressRaw": "diretoria.financeira@leroymerlin-corp.com",
+        "domain": "leroymerlin-corp.com",
+        "isSpoofed": true,
+        "spoofType": "lookalike_domain"
+      },
+      "links": [],
+      "attachments": [],
+      "headers": {
+        "fromServer": "mail.leroymerlin-corp.com",
+        "sourceIp": "91.219.212.77",
+        "spf": "fail",
+        "dkim": "none",
+        "dmarc": "fail",
+        "sentAt": "2026-07-22T14:32:00Z",
+        "routeHops": ["91.219.212.77"]
+      },
+      "aiAssistantHint": {
+        "phishingProbability": 95,
+        "isReliable": true,
+        "reasoning": "An urgent transfer, skipping the usual approval, from an address that is not the company's. It is the fake-boss scam."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "pix_falso",
+      "tags": ["pix_falso", "bec", "engenharia_social"],
+      "difficulty": 3,
+      "investigationHints": [
+        { "toolId": "sender_address", "revealsField": "sender.domain", "summaryText": "'leroymerlin-corp.com' is not the company's official address." },
+        { "toolId": "header_inspect", "revealsField": "headers", "summaryText": "The automatic checks did not match: it did not come from who it claims." },
+        { "toolId": "ai_assistant", "revealsField": "aiAssistantHint", "summaryText": "The helper recognizes the fake-boss scam asking for a transfer." }
+      ],
+      "explanation": {
+        "short": "Fake-payment scam: an urgent PIX pretending to be management.",
+        "detailed": "An urgent PIX request, with no approval and using pressure ('I'm in a meeting', 'don't lose the deal'), is the fake-payment scam. The address it came from is not the company's official one. An urgent payment should always be confirmed through another channel before it's made.",
+        "conceptGlossaryId": "bec_pix_urgente"
+      },
+      "idealInvestigationSeconds": 8
+    },
+    {
+      "id": "d3-e03",
+      "dayId": "day-03",
+      "order": 2,
+      "subject": "Updated payment slip - Constrular Vendor",
+      "bodyHtml": "<p>Attached is the updated payment slip for the last shipment of materials. Please use only this slip for payment, the previous one was canceled due to a value error.</p>",
+      "sender": {
+        "displayName": "Constrular Materiais Finance",
+        "emailAddressRaw": "financeiro@constrular-materiais.com.br",
+        "domain": "constrular-materiais.com.br",
+        "isSpoofed": false,
+        "spoofType": "compromised_legit"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d3-e03-att1",
+          "fileName": "updated_invoice.pdf",
+          "declaredExtension": ".pdf",
+          "actualType": "application/pdf",
+          "sizeKB": 145,
+          "hasMacro": false,
+          "isMalicious": true
+        }
+      ],
+      "headers": {
+        "fromServer": "mail.constrular-materiais.com.br",
+        "sourceIp": "177.85.44.12",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-07-22T10:05:00Z",
+        "routeHops": ["177.85.44.12"]
+      },
+      "internalDbRecord": { "senderStatus": "trusted_vendor", "notes": "Vendor active for 5 years. Registered payee: 'Constrular Materiais de Construção LTDA'." },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "boleto_adulterado",
+      "tags": ["boleto_adulterado", "fornecedor_comprometido"],
+      "difficulty": 3,
+      "investigationHints": [
+        { "toolId": "internal_db_lookup", "revealsField": "internalDbRecord", "summaryText": "The registered payee is 'Constrular Materiais de Construção LTDA' — check whether the attached slip matches this name before paying." },
+        { "toolId": "attachment_analysis", "revealsField": "attachments[0].actualType", "summaryText": "The file is technically a legitimate PDF, but that doesn't guarantee the banking details inside it haven't been tampered with." },
+        { "toolId": "header_inspect", "revealsField": "headers", "summaryText": "The automatic checks matched: the email really did come from the supplier." }
+      ],
+      "explanation": {
+        "short": "Real vendor, but payment slip with a tampered payee.",
+        "detailed": "This is the most dangerous case: a real sender, a real address, every check on the email passing. The scam is inside the PDF: the payee on the slip was swapped for a different account. The defense here isn't technical. Always confirm a change of payment details by phone, with a contact you already know at the vendor. Never by email alone.",
+        "conceptGlossaryId": "boleto_adulterado_fornecedor_real"
+      },
+      "idealInvestigationSeconds": 12
+    },
+    {
+      "id": "d3-e04",
+      "dayId": "day-03",
+      "order": 3,
+      "subject": "Microsoft: your Office 365 license expires today",
+      "bodyHtml": "<p>Your Microsoft 365 license expires today at 11:59pm. Click below to renew automatically and avoid losing access to your files.</p>",
+      "sender": {
+        "displayName": "Microsoft Account Team",
+        "emailAddressRaw": "account-security@micros0ft-online.com",
+        "domain": "micros0ft-online.com",
+        "isSpoofed": true,
+        "spoofType": "lookalike_domain"
+      },
+      "links": [
+        { "id": "d3-e04-link1", "displayText": "Renew license", "actualUrl": "http://micros0ft-online.com/renovar-licenca", "isMalicious": true }
+      ],
+      "attachments": [],
+      "certificate": {
+        "companyName": "Micros0ft Online Services",
+        "issuer": "Let's Encrypt",
+        "validFrom": "2026-07-15T00:00:00Z",
+        "validTo": "2026-10-15T00:00:00Z",
+        "domain": "micros0ft-online.com",
+        "isTechnicallyValid": true,
+        "isTrustworthy": false
+      },
+      "headers": {
+        "fromServer": "mail.micros0ft-online.com",
+        "sourceIp": "45.146.164.90",
+        "spf": "fail",
+        "dkim": "fail",
+        "dmarc": "fail",
+        "sentAt": "2026-07-22T07:55:00Z",
+        "routeHops": ["45.146.164.90"]
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "microsoft_falso",
+      "tags": ["microsoft_falso", "phishing", "link_malicioso"],
+      "difficulty": 3,
+      "investigationHints": [
+        { "toolId": "sender_address", "revealsField": "sender.domain", "summaryText": "'micros0ft-online.com' uses the number zero in place of the letter 'o'. It's not a Microsoft address." },
+        { "toolId": "certificate_view", "revealsField": "certificate", "summaryText": "The padlock is valid, but it was issued for the fake address — not for the real Microsoft." },
+        { "toolId": "header_inspect", "revealsField": "headers", "summaryText": "The automatic checks did not match: it did not come from who it claims." }
+      ],
+      "explanation": {
+        "short": "Fake Microsoft address, with a number in place of a letter.",
+        "detailed": "'micros0ft-online.com' swaps the 'o' for a zero: it's the lookalike-address trick. The site's padlock works, but that only says the connection is secure, not that the site belongs to Microsoft. The real Microsoft would never use this address, and the email's checks failed.",
+        "conceptGlossaryId": "microsoft_falso_typosquatting"
+      },
+      "idealInvestigationSeconds": 9
+    },
+    {
+      "id": "d3-e06",
+      "dayId": "day-03",
+      "order": 4,
+      "subject": "Monthly operations meeting agenda",
+      "bodyHtml": "<p>Attached is the agenda for tomorrow's monthly operations meeting, at 10am in the training room. Attendance is mandatory for department leaders.</p>",
+      "sender": {
+        "displayName": "Leroy Merlin Operations",
+        "emailAddressRaw": "operacoes@leroymerlin.com.br",
+        "domain": "leroymerlin.com.br",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d3-e06-att1",
+          "fileName": "operations_meeting_agenda.pdf",
+          "declaredExtension": ".pdf",
+          "actualType": "application/pdf",
+          "sizeKB": 210,
+          "hasMacro": false,
+          "isMalicious": false
+        }
+      ],
+      "headers": {
+        "fromServer": "mail.leroymerlin.com.br",
+        "sourceIp": "200.150.10.25",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-07-22T07:00:00Z",
+        "routeHops": ["200.150.10.25"]
+      },
+      "internalDbRecord": { "senderStatus": "trusted_vendor", "notes": "Official internal department." },
+      "riskLevel": "safe",
+      "correctAction": "accept",
+      "primaryConcept": "legitimo",
+      "tags": ["legitimo"],
+      "difficulty": 3,
+      "investigationHints": [
+        { "toolId": "sender_address", "revealsField": "sender.domain", "summaryText": "Company's official address." },
+        { "toolId": "attachment_analysis", "revealsField": "attachments[0].actualType", "summaryText": "It is a real PDF: the file name matches the content and there is no program inside." }
+      ],
+      "explanation": {
+        "short": "Legitimate internal announcement with a safe attachment.",
+        "detailed": "Official address, the email's checks passing, and the attachment is a genuine PDF with no sign of a virus. Not every attachment is dangerous: what matters is checking before you decide.",
+        "conceptGlossaryId": "nem_todo_anexo_e_perigoso"
+      },
+      "idealInvestigationSeconds": 4
+    }
+  ]
+}

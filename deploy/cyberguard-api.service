@@ -1,0 +1,19 @@
+[Unit]
+Description=CyberGuard Leroy Merlin - NestJS API (Sele Sistemas)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=cyberguard
+Group=cyberguard
+WorkingDirectory=/opt/leroy-cyber-game/apps/api
+EnvironmentFile=/opt/leroy-cyber-game/apps/api/.env
+Environment=PORT=3003
+ExecStart=/usr/bin/node dist/main.js
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

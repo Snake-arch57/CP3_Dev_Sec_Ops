@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+
+  // Conexão da aplicação: passa pelo pooler do Supabase (porta 6543), porque
+  // em serverless cada invocação abriria a própria conexão e estouraria o
+  // limite do Postgres em poucos minutos.
+  url = env("DATABASE_URL")
+
+  // Migrations precisam de conexão direta (porta 5432) — o pooler em modo
+  // transaction não suporta os comandos que o `migrate deploy` executa.
+  // Em ambiente sem pooler, aponte as duas para a mesma URL.
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  ADMIN
+  EMPLOYEE
+}
+
+model User {
+  id                 String    @id @default(cuid())
+  username           String    @unique
+  email              String?   @unique
+  passwordHash       String
+  displayName        String
+  department         String?
+  role               Role      @default(EMPLOYEE)
+  mustChangePassword Boolean   @default(true)
+  level              Int       @default(1)
+  xp                 Int       @default(0)
+  money              Int       @default(0)
+  reputation         Int       @default(100)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  ownedUpgrades        OwnedUpgrade[]
+  unlockedAchievements UnlockedAchievement[]
+  phaseResults         PhaseResult[]
+}
+
+model OwnedUpgrade {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  upgradeId String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, upgradeId])
+}
+
+model UnlockedAchievement {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievementId String
+  unlockedAt    DateTime @default(now())
+
+  @@unique([userId, achievementId])
+}
+
+model PhaseResult {
+  id                   String   @id @default(cuid())
+  userId               String
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dayId                String
+  correctCount         Int
+  wrongCount           Int
+  totalScore           Int
+  xpEarned             Int
+  moneyEarned          Int
+  timeUsedSeconds      Int
+  bestCombo            Int
+  conceptCorrectCounts Json
+  completedAt          DateTime @default(now())
+
+  @@index([userId])
+  @@index([dayId])
+}

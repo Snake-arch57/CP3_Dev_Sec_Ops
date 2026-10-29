@@ -1,0 +1,281 @@
+{
+  "id": "day-04",
+  "dayNumber": 4,
+  "title": "Things get subtle",
+  "description": "No more obvious scams. Now they mix several tricks at once — and not everything that looks suspicious is.",
+  "difficultyRange": [4, 4],
+  "timeLimitSeconds": 300,
+  "isBossDay": false,
+  "events": [
+    {
+      "id": "d4-ev1",
+      "type": "message_burst",
+      "triggerAfterEmailIndex": 2,
+      "durationSeconds": 8,
+      "message": "The network freezes for a few seconds — something is overloading the system.",
+      "effect": { "kind": "ui_distraction", "variant": "lag_glitch" }
+    }
+  ],
+  "emails": [
+    {
+      "id": "d4-e01",
+      "dayId": "day-04",
+      "order": 1,
+      "subject": "Action required: VPN certificate renewal",
+      "bodyHtml": "<p>Hello,</p><p>The corporate VPN certificate expires today. Download and install the new client via the link below before 6pm to avoid losing remote access.</p>",
+      "sender": {
+        "displayName": "Leroy Merlin IT",
+        "emailAddressRaw": "suporte@leroymer1in.com.br",
+        "domain": "leroymer1in.com.br",
+        "isSpoofed": true,
+        "spoofType": "homograph"
+      },
+      "links": [
+        {
+          "id": "d4-e01-link1",
+          "displayText": "Download new VPN client",
+          "actualUrl": "http://leroymer1in.com.br/vpn-client-update.exe",
+          "isMalicious": true
+        }
+      ],
+      "attachments": [],
+      "headers": {
+        "fromServer": "mail.leroymer1in.com.br",
+        "sourceIp": "91.219.212.44",
+        "spf": "fail",
+        "dkim": "none",
+        "dmarc": "fail",
+        "sentAt": "2026-08-10T08:05:00Z",
+        "routeHops": ["91.219.212.44"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "recently_created_domain",
+        "notes": "Address created 2 days ago. Uses '1' instead of 'l' in 'leroymerlin' — almost identical to the real one."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "phishing",
+      "tags": ["phishing", "link_malicioso", "engenharia_social"],
+      "difficulty": 4,
+      "investigationHints": [
+        {
+          "toolId": "domain_inspect",
+          "revealsField": "sender.domain",
+          "summaryText": "'leroymer1in.com.br' uses the number 1 instead of the 'l'. At a glance, it looks just like the official address."
+        },
+        {
+          "toolId": "header_inspect",
+          "revealsField": "headers",
+          "summaryText": "The automatic checks did not match, and the email did not come from any company computer."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "Address created only 2 days ago. Far too recent to be a real IT notice."
+        }
+      ],
+      "explanation": {
+        "short": "Address with a swapped letter ('1' instead of 'l') asking you to install a program.",
+        "detailed": "At first glance, 'leroymer1in.com.br' looks like the official address: swapping 'l' for '1' slips right past a quick read. Add a short deadline ('before 6pm') and a link that downloads a program disguised as an update, and it's a well-made scam. Always check the address letter by letter when someone asks you to install something.",
+        "conceptGlossaryId": "dominio_falso"
+      },
+      "idealInvestigationSeconds": 12
+    },
+    {
+      "id": "d4-e02",
+      "dayId": "day-04",
+      "order": 2,
+      "subject": "I need a quick favor, it's urgent",
+      "bodyHtml": "<p>Hi, I'm in a meeting and can't call right now.</p><p>I need you to buy 5 gift cards worth R$500 each for an important client and send me the codes here. I'll reimburse you when I'm back. I'm counting on you, this is confidential.</p>",
+      "sender": {
+        "displayName": "Director Ricardo Almeida",
+        "emailAddressRaw": "ricardo.almeida.diretoria@gmail.com",
+        "domain": "gmail.com",
+        "isSpoofed": true,
+        "spoofType": "display_name_spoof"
+      },
+      "links": [],
+      "attachments": [],
+      "headers": {
+        "fromServer": "smtp.gmail.com",
+        "sourceIp": "142.250.65.109",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "none",
+        "sentAt": "2026-08-10T09:20:00Z",
+        "routeHops": ["142.250.65.109"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "never_used",
+        "notes": "This address has never sent anything to the company before. The real director only uses his corporate email."
+      },
+      "outOfBandCheck": {
+        "channelDescription": "Call to Director Ricardo Almeida's registered extension",
+        "outcome": "confirmed_fraud",
+        "details": "The director confirmed by phone that he did not send this email and is in an in-person meeting without access to a computer."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "bec",
+      "tags": ["bec", "engenharia_social"],
+      "difficulty": 4,
+      "investigationHints": [
+        {
+          "toolId": "sender_address",
+          "revealsField": "sender.emailAddressRaw",
+          "summaryText": "The address is a personal Gmail, not the director's corporate email — only the display name was copied."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "This sender has never sent anything to the company — the real director only uses his corporate email."
+        },
+        {
+          "toolId": "out_of_band_verify",
+          "revealsField": "outOfBandCheck",
+          "summaryText": "The real director, contacted by phone, confirmed he did not send this request."
+        }
+      ],
+      "explanation": {
+        "short": "Fake-payment scam in a boss's name: a director's name, a personal email, an urgent and secret request.",
+        "detailed": "The email's checks pass because it really did come from a real Gmail account. It just isn't the director's. It's the fake-payment scam in a boss's name: rush, secrecy, and a request that dodges any check (gift cards are nearly impossible to trace or recover). The only safe way is to confirm through another channel: call the director's number that you already have, never reply on the same email.",
+        "conceptGlossaryId": "bec"
+      },
+      "idealInvestigationSeconds": 14
+    },
+    {
+      "id": "d4-e03",
+      "dayId": "day-04",
+      "order": 3,
+      "subject": "Invoice 3021 - payment confirmed",
+      "bodyHtml": "<p>Hello,</p><p>We confirm receipt of the payment for invoice 3021. Please find the receipt attached for your records. Let us know if you have any questions.</p>",
+      "sender": {
+        "displayName": "Vendor ABC Finance",
+        "emailAddressRaw": "financeiro@fornecedorabc.com",
+        "domain": "fornecedorabc.com",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d4-e03-att1",
+          "fileName": "receipt_3021.pdf",
+          "declaredExtension": ".pdf",
+          "actualType": "application/pdf",
+          "sizeKB": 128,
+          "hasMacro": false,
+          "isMalicious": false,
+          "sandboxResult": { "outcome": "no_activity" }
+        }
+      ],
+      "certificate": {
+        "companyName": "Fornecedor ABC LTDA",
+        "issuer": "Let's Encrypt",
+        "validFrom": "2026-06-01T00:00:00Z",
+        "validTo": "2026-09-01T00:00:00Z",
+        "domain": "fornecedorabc.com",
+        "isTechnicallyValid": true,
+        "isTrustworthy": true
+      },
+      "internalDbRecord": {
+        "senderStatus": "trusted_vendor",
+        "notes": "Vendor active for 3 years. Communication consistent with normal history."
+      },
+      "headers": {
+        "fromServer": "mail.fornecedorabc.com",
+        "sourceIp": "201.45.12.9",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-08-10T10:00:00Z",
+        "routeHops": ["201.45.12.9"]
+      },
+      "riskLevel": "safe",
+      "correctAction": "accept",
+      "primaryConcept": "legitimo",
+      "tags": ["fornecedor_comprometido", "legitimo"],
+      "difficulty": 4,
+      "investigationHints": [
+        {
+          "toolId": "attachment_analysis",
+          "revealsField": "attachments[0].actualType",
+          "summaryText": "The attachment is a real PDF, with no double extension or signs of disguise."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "Trusted vendor, with a normal and consistent communication history."
+        }
+      ],
+      "explanation": {
+        "short": "Legitimate communication from a trusted vendor.",
+        "detailed": "After the 'invoice_2854.pdf.exe' scam, you can be suspicious of any email from this vendor. But not every contact from them is a scam. Here the attachment is a real PDF, the site is trustworthy, and the account's history matches. Checking and finding everything is fine is also a win: reporting or deleting real email disrupts the work.",
+        "conceptGlossaryId": "fornecedor_comprometido"
+      },
+      "idealInvestigationSeconds": 8
+    },
+    {
+      "id": "d4-e04",
+      "dayId": "day-04",
+      "order": 4,
+      "subject": "HR: update your registration details via QR code",
+      "bodyHtml": "<p>Dear employee,</p><p>We are updating our registration system. Scan the QR code below with your phone to confirm your bank details by tomorrow.</p>",
+      "sender": {
+        "displayName": "Leroy Merlin HR",
+        "emailAddressRaw": "rh@leroymerlin-cadastro.com.br",
+        "domain": "leroymerlin-cadastro.com.br",
+        "isSpoofed": true,
+        "spoofType": "lookalike_domain"
+      },
+      "links": [],
+      "attachments": [],
+      "qrCode": {
+        "imageAsset": "qr-rh-cadastro.png",
+        "decodedUrl": "http://leroymerlin-cadastro.com.br/dados-bancarios",
+        "isMalicious": true
+      },
+      "headers": {
+        "fromServer": "mail.leroymerlin-cadastro.com.br",
+        "sourceIp": "45.140.17.88",
+        "spf": "fail",
+        "dkim": "none",
+        "dmarc": "fail",
+        "sentAt": "2026-08-10T11:30:00Z",
+        "routeHops": ["45.140.17.88"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "recently_created_domain",
+        "notes": "Address created 4 days ago. HR never asks for bank details by QR code."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "qr_falso",
+      "tags": ["qr_falso", "phishing", "engenharia_social"],
+      "difficulty": 4,
+      "investigationHints": [
+        {
+          "toolId": "qr_preview",
+          "revealsField": "qrCode.decodedUrl",
+          "summaryText": "The QR code leads to an address that looks like the official one, but isn't the company's."
+        },
+        {
+          "toolId": "domain_inspect",
+          "revealsField": "sender.domain",
+          "summaryText": "'leroymerlin-cadastro.com.br' is not the company's — it is a lookalike address registered by someone else."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "Recently created address. HR never asks for bank details this way."
+        }
+      ],
+      "explanation": {
+        "short": "QR code hiding a scam link to steal bank details.",
+        "detailed": "A QR code hides where it leads: you only find out after you scan it. Here, the address behind it is an imitation of the company's official address, created a few days ago just for this scam. Real HR never asks for bank details through a QR code with a tight deadline.",
+        "conceptGlossaryId": "qr_falso"
+      },
+      "idealInvestigationSeconds": 10
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "id": "day-05",
+  "dayNumber": 5,
+  "title": "Pressão e urgência",
+  "description": "Áudios, vídeos e ligações agora fazem parte do golpe. Quanto mais alguém tenta te apressar, mais importa parar para confirmar.",
+  "difficultyRange": [5, 5],
+  "timeLimitSeconds": 330,
+  "isBossDay": false,
+  "events": [
+    {
+      "id": "d5-ev1",
+      "type": "boss_call",
+      "triggerAfterEmailIndex": 1,
+      "durationSeconds": 6,
+      "message": "'Preciso que você aprove uma transferência AGORA, estou em reunião, depois te explico.' — mensagem do seu gerente.",
+      "effect": { "kind": "ui_distraction", "variant": "boss_popup" }
+    }
+  ],
+  "emails": [
+    {
+      "id": "d5-e01",
+      "dayId": "day-05",
+      "order": 1,
+      "subject": "Confirmação urgente - transferência PIX da aquisição",
+      "bodyHtml": "<p>Segue em anexo o print da nossa videochamada de agora há pouco confirmando os dados.</p><p>Por favor, efetue o PIX de R$48.000 para a chave abaixo ainda hoje. É confidencial até o anúncio oficial da aquisição na sexta-feira.</p><p>Chave PIX: 45.812.finance@fastpay.com.br</p>",
+      "sender": {
+        "displayName": "Carla Mendes - CFO",
+        "emailAddressRaw": "carla.mendes@leroymerlin.corp-mail.com",
+        "domain": "leroymerlin.corp-mail.com",
+        "isSpoofed": true,
+        "spoofType": "subdomain_trick"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d5-e01-att1",
+          "fileName": "confirmacao_videochamada.jpg",
+          "declaredExtension": ".jpg",
+          "actualType": "image/jpeg",
+          "sizeKB": 210,
+          "hasMacro": false,
+          "isMalicious": false
+        }
+      ],
+      "headers": {
+        "fromServer": "mail.corp-mail.com",
+        "sourceIp": "103.42.18.90",
+        "spf": "fail",
+        "dkim": "none",
+        "dmarc": "fail",
+        "sentAt": "2026-08-11T09:10:00Z",
+        "routeHops": ["103.42.18.90"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "never_used",
+        "notes": "'leroymerlin.corp-mail.com' não é da empresa: pertence a 'corp-mail.com', um serviço de fora."
+      },
+      "outOfBandCheck": {
+        "channelDescription": "Ligação para o ramal cadastrado da CFO Carla Mendes",
+        "outcome": "confirmed_fraud",
+        "details": "A CFO confirmou que não houve nenhuma videochamada e que não existe aquisição em andamento."
+      },
+      "aiAssistantHint": {
+        "phishingProbability": 45,
+        "isReliable": false,
+        "reasoning": "O texto formal e a imagem anexada parecem legítimos. A IA não analisa vídeo/áudio nem confirma identidade por outros meios."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "deepfake",
+      "tags": ["deepfake", "pix_falso", "bec"],
+      "difficulty": 5,
+      "investigationHints": [
+        {
+          "toolId": "domain_inspect",
+          "revealsField": "sender.domain",
+          "summaryText": "'leroymerlin.corp-mail.com' pertence a 'corp-mail.com', um serviço de fora. O nome da empresa está só no começo."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "Esse endereço nunca foi usado antes para falar com a empresa."
+        },
+        {
+          "toolId": "out_of_band_verify",
+          "revealsField": "outOfBandCheck",
+          "summaryText": "A CFO de verdade, contatada por telefone, confirmou que não existe essa videochamada nem aquisição."
+        }
+      ],
+      "explanation": {
+        "short": "Endereço parecido com o da empresa, mais uma imagem falsa de videochamada, para dar cara de verdade a um pedido de PIX.",
+        "detailed": "'leroymerlin.corp-mail.com' parece ter 'leroymerlin' no nome, mas o endereço de verdade é 'corp-mail.com' — a empresa aparece só como enfeite, para enganar quem lê rápido. A 'confirmação' anexada é só uma imagem, fácil de forjar. Pedido de transferência urgente, secreto e fora do processo é o golpe do pagamento falso em nome do chefe. A única defesa real é confirmar por outro canal, como ligar para o número que você já tem da pessoa.",
+        "conceptGlossaryId": "deepfake"
+      },
+      "idealInvestigationSeconds": 16
+    },
+    {
+      "id": "d5-e03",
+      "dayId": "day-05",
+      "order": 2,
+      "subject": "Seu código de verificação em duas etapas",
+      "bodyHtml": "<p>Olá,</p><p>Recebemos uma tentativa de login na sua conta corporativa a partir de um dispositivo novo.</p><p>Se foi você, use o código <strong>482913</strong> para confirmar o acesso. Se não reconhece essa tentativa, ignore este email e sua conta permanecerá segura.</p>",
+      "sender": {
+        "displayName": "Segurança da Conta - Leroy Merlin",
+        "emailAddressRaw": "seguranca@leroymerlin.com.br",
+        "domain": "leroymerlin.com.br",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [],
+      "attachments": [],
+      "headers": {
+        "fromServer": "mail.leroymerlin.com.br",
+        "sourceIp": "179.94.10.5",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-08-11T11:30:00Z",
+        "routeHops": ["179.94.10.5"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "trusted_vendor",
+        "notes": "Endereço oficial da empresa. É o sistema que manda os códigos de acesso."
+      },
+      "riskLevel": "safe",
+      "correctAction": "accept",
+      "primaryConcept": "legitimo",
+      "tags": ["mfa", "legitimo"],
+      "difficulty": 5,
+      "investigationHints": [
+        {
+          "toolId": "sender_address",
+          "revealsField": "sender.domain",
+          "summaryText": "Vem do endereço oficial da empresa, escrito do jeito certo, sem letra trocada."
+        },
+        {
+          "toolId": "header_inspect",
+          "revealsField": "headers",
+          "summaryText": "As conferências automáticas bateram: o e-mail saiu mesmo do sistema da empresa."
+        }
+      ],
+      "explanation": {
+        "short": "Aviso de verdade de confirmação em duas etapas, do endereço oficial, com opção segura de ignorar.",
+        "detailed": "Diferente de um golpe, este e-mail não pede para clicar em nada nem te apressa. Ele só informa um código e explica o que fazer se você não reconhecer o acesso. O endereço e as checagens do e-mail confirmam que é de verdade. Aviso de confirmação em duas etapas funciona assim: informa, não tem link, e dá uma saída segura para quem não reconhece o acesso.",
+        "conceptGlossaryId": "mfa"
+      },
+      "idealInvestigationSeconds": 8
+    },
+    {
+      "id": "d5-e04",
+      "dayId": "day-05",
+      "order": 3,
+      "subject": "Fwd: Fwd: OPORTUNIDADE - empréstimo consignado liberado",
+      "bodyHtml": "<p>Bom dia pessoal, recebi isso no grupo da empresa no WhatsApp e estão encaminhando pra todo mundo, segue o link:</p><p>Empréstimo consignado liberado sem consulta ao SPC/Serasa, aprovação em 5 minutos, clique e confira suas condições exclusivas de colaborador.</p>",
+      "sender": {
+        "displayName": "Ana (RH - grupo do WhatsApp)",
+        "emailAddressRaw": "ana.rh.grupowpp@hotmail.com",
+        "domain": "hotmail.com",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [
+        {
+          "id": "d5-e04-link1",
+          "displayText": "Ver condições exclusivas",
+          "actualUrl": "http://emprestimo-facil-colaborador.net/oferta",
+          "isMalicious": true
+        }
+      ],
+      "attachments": [],
+      "headers": {
+        "fromServer": "smtp.hotmail.com",
+        "sourceIp": "40.97.110.20",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "none",
+        "sentAt": "2026-08-11T13:00:00Z",
+        "routeHops": ["40.97.110.20"]
+      },
+      "riskLevel": "suspicious",
+      "correctAction": "report",
+      "primaryConcept": "whatsapp_falso",
+      "tags": ["whatsapp_falso", "phishing", "engenharia_social"],
+      "difficulty": 5,
+      "investigationHints": [
+        {
+          "toolId": "link_hover",
+          "revealsField": "links[0].actualUrl",
+          "summaryText": "O link leva a um endereço qualquer de golpe financeiro, sem relação com banco de verdade."
+        },
+        {
+          "toolId": "domain_inspect",
+          "revealsField": "sender.domain",
+          "summaryText": "Enviado de um Hotmail pessoal encaminhando uma corrente, não de um canal oficial de RH."
+        }
+      ],
+      "explanation": {
+        "short": "Corrente de golpe financeiro reencaminhada por email pessoal, sem alvo específico na empresa.",
+        "detailed": "Esse é um golpe de massa clássico — 'empréstimo fácil sem consulta' é uma isca genérica que circula por grupos de WhatsApp e é reencaminhada, muitas vezes por pessoas bem-intencionadas que não perceberam o golpe. Diferente dos golpes anteriores, este não foi feito para a empresa nem usa os sistemas da Leroy Merlin. Mesmo assim é golpe: marque como golpe e, principalmente, não repasse para ninguém.",
+        "conceptGlossaryId": "whatsapp_falso"
+      },
+      "idealInvestigationSeconds": 8
+    },
+    {
+      "id": "d5-e05",
+      "dayId": "day-05",
+      "order": 4,
+      "subject": "Boleto atualizado - novo beneficiário a partir deste mês",
+      "bodyHtml": "<p>Prezados,</p><p>Informamos que, devido a uma reestruturação societária, nossos pagamentos passarão a ser recebidos por uma nova razão social. Segue o boleto atualizado em anexo com os novos dados bancários.</p>",
+      "sender": {
+        "displayName": "Financeiro Fornecedor ABC",
+        "emailAddressRaw": "financeiro@fornecedorabc.com",
+        "domain": "fornecedorabc.com",
+        "isSpoofed": false,
+        "spoofType": "compromised_legit"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d5-e05-att1",
+          "fileName": "boleto_atualizado_agosto.pdf",
+          "declaredExtension": ".pdf",
+          "actualType": "application/pdf",
+          "sizeKB": 96,
+          "hasMacro": false,
+          "isMalicious": false
+        }
+      ],
+      "certificate": {
+        "companyName": "Fornecedor ABC LTDA",
+        "issuer": "Let's Encrypt",
+        "validFrom": "2026-06-01T00:00:00Z",
+        "validTo": "2026-09-01T00:00:00Z",
+        "domain": "fornecedorabc.com",
+        "isTechnicallyValid": true,
+        "isTrustworthy": false
+      },
+      "headers": {
+        "fromServer": "mail.fornecedorabc.com",
+        "sourceIp": "201.45.12.9",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-08-11T14:20:00Z",
+        "routeHops": ["201.45.12.9"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "trusted_vendor",
+        "notes": "Conta legítima do fornecedor, mas nenhuma reestruturação societária foi comunicada previamente por canais oficiais."
+      },
+      "outOfBandCheck": {
+        "channelDescription": "Ligação para o contato financeiro já conhecido do Fornecedor ABC",
+        "outcome": "confirmed_fraud",
+        "details": "O fornecedor confirmou que não houve nenhuma reestruturação e que a conta de email dele foi comprometida recentemente."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "boleto_adulterado",
+      "tags": ["boleto_adulterado", "fornecedor_comprometido", "bec"],
+      "difficulty": 5,
+      "investigationHints": [
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "Nenhuma reestruturação societária foi comunicada antes por canais oficiais — mudança de beneficiário sem aviso prévio é bandeira vermelha."
+        },
+        {
+          "toolId": "out_of_band_verify",
+          "revealsField": "outOfBandCheck",
+          "summaryText": "O fornecedor confirmou por telefone que a conta de email foi comprometida e que não houve reestruturação nenhuma."
+        }
+      ],
+      "explanation": {
+        "short": "Conta real do fornecedor comprometida para trocar os dados bancários do boleto.",
+        "detailed": "Este é o golpe do 'boleto trocado' na pior forma: o e-mail vem mesmo da conta real do fornecedor (por isso as checagens passam), porque a conta foi invadida. Troca de conta para pagamento, sem aviso pelo canal de sempre, é sempre motivo para confirmar fora do e-mail antes de pagar. Foi essa confirmação que revelou o golpe.",
+        "conceptGlossaryId": "boleto_adulterado"
+      },
+      "idealInvestigationSeconds": 14
+    }
+  ]
+}

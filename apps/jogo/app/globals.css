@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+/*
+ * Identidade Hackudinhos — paleta CIFRA v1.
+ *
+ * Regra dura do manual: uma cor, uma função. Menta não abre alerta, âmbar não
+ * confirma nada, e o petróleo nunca é fundo de página inteira — ele é campo
+ * institucional, aparece como superfície de destaque.
+ *
+ * O manual é escuro por definição ("chumbo, o fundo de tudo"), então o tema
+ * escuro abaixo é a identidade à risca. O tema claro é uma inversão derivada,
+ * mantida para não remover um recurso que já existia: os mesmos papéis, com a
+ * menta e o âmbar escurecidos até passarem em contraste sobre fundo claro.
+ *
+ * Todos os pares texto/fundo foram verificados contra WCAG AA (4,5:1).
+ */
+
+:root {
+  --color-bg: #F2F4F3;          /* papel */
+  --color-surface: #FFFFFF;
+  --color-surface-2: #E4E8E7;
+  --color-surface-3: #D2D8D6;
+  --color-border: #C2C9C7;
+  --color-primary: #1A6B55;     /* menta 800 — a menta base não contrasta sobre claro */
+  --color-primary-hover: #124839;
+  --color-success: #1A6B55;
+  --color-danger: #A32B22;
+  --color-warning: #8A5A10;
+  --color-text: #1B1D21;        /* chumbo */
+  --color-text-muted: #5A6068;
+  --color-campo: #164752;       /* petróleo */
+}
+
+.dark {
+  --color-bg: #1B1D21;          /* chumbo */
+  --color-surface: #2E3138;     /* chumbo painel */
+  --color-surface-2: #383C44;   /* chumbo linha */
+  --color-surface-3: #4A4F59;   /* chumbo linha forte */
+  --color-border: #4A4F59;
+  --color-primary: #3ED6A4;     /* menta — ação, índice, concluído */
+  --color-primary-hover: #61DDB4;
+  --color-success: #3ED6A4;     /* concluído é menta, conforme o manual */
+  --color-danger: #F28B80;      /* fora do manual: ver nota abaixo */
+  --color-warning: #F2A93D;     /* âmbar — risco, em bloco cheio */
+  --color-text: #F2F4F3;        /* papel */
+  --color-text-muted: #A9AFAE;  /* papel 2 */
+  --color-campo: #164752;       /* petróleo — campo institucional */
+}
+
+/*
+ * Sobre o --color-danger: o manual não define cor de erro. Ele resolve risco
+ * com âmbar em bloco cheio, o que serve para "atenção", não para "você errou".
+ * O jogo precisa dos dois — resposta errada e falha de operação são eventos
+ * distintos de um alerta. O vermelho foi escolhido para conviver com a paleta
+ * e verificado em contraste: 7,06 sobre o chumbo e 5,44 sobre o painel.
+ */
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-surface-3: var(--color-surface-3);
+  --color-border: var(--color-border);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-success: var(--color-success);
+  --color-danger: var(--color-danger);
+  --color-warning: var(--color-warning);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-campo: var(--color-campo);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-pixel);
+  --font-stencil: var(--font-heading);
+  --font-pixel: var(--font-pixel);
+}
+
+html {
+  color-scheme: dark;
+}
+
+html:not(.dark) {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(color-mix(in srgb, var(--color-text) 6%, transparent) 1px, transparent 1px);
+  background-size: 3px 3px;
+  color: var(--color-text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  /* 16px é o corpo do manual. A fonte anterior era estreita e pedia 18. */
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+* {
+  scrollbar-color: var(--color-surface-3) var(--color-bg);
+}
+
+/* ═══════════════════════════════════════════════════
+   Glossary Book Animations
+   ═══════════════════════════════════════════════════ */
+
+@keyframes book-open {
+  0% {
+    opacity: 0;
+    transform: perspective(1800px) rotateY(-25deg) rotateX(5deg) scale(0.8) translateY(30px);
+  }
+  60% {
+    opacity: 1;
+    transform: perspective(1800px) rotateY(3deg) rotateX(-1deg) scale(1.02) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1800px) rotateY(0deg) rotateX(0deg) scale(1) translateY(0px);
+  }
+}
+
+@keyframes book-overlay-in {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes book-close {
+  0% {
+    opacity: 1;
+    transform: perspective(1800px) rotateY(0deg) scale(1) translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: perspective(1800px) rotateY(-20deg) scale(0.85) translateY(20px);
+  }
+}
+
+@keyframes book-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes bounce-x {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-3px);
+  }
+}
+
+@keyframes bounce-x-reverse {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+.glossary-content[data-state="open"] {
+  animation: book-open 550ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.glossary-content[data-state="closed"] {
+  animation: book-close 350ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+.glossary-overlay[data-state="open"] {
+  animation: book-overlay-in 300ms ease-out both;
+}
+
+.glossary-overlay[data-state="closed"] {
+  animation: book-overlay-out 300ms ease-in both;
+}
+
+.glossary-book-cover {
+  transition: box-shadow 0.3s ease;
+}
+
+.glossary-book-cover:hover {
+  box-shadow:
+    0 25px 60px -12px rgba(0, 0, 0, 0.5),
+    0 0 40px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.animate-bounce-x {
+  animation: bounce-x 1.5s ease-in-out infinite;
+}
+
+.animate-bounce-x-reverse {
+  animation: bounce-x-reverse 1.5s ease-in-out infinite;
+}

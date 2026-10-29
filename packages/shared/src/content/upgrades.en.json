@@ -1,0 +1,50 @@
+[
+  {
+    "id": "upg-monitor-maior",
+    "name": "Bigger Monitor",
+    "description": "More screen space gives you a bit more time per email.",
+    "icon": "monitor",
+    "priceMoney": 300,
+    "effect": { "kind": "extra_time_per_email", "seconds": 3 }
+  },
+  {
+    "id": "upg-scanner-anexos",
+    "name": "Attachment Scanner",
+    "description": "Reduces the time needed to analyze attachments.",
+    "icon": "file-search",
+    "priceMoney": 400,
+    "effect": { "kind": "reduce_tool_cost", "toolId": "attachment_analysis", "reduceSeconds": 1 }
+  },
+  {
+    "id": "upg-detector-links",
+    "name": "Link Detector",
+    "description": "Reduces the time needed to inspect links.",
+    "icon": "link-2",
+    "priceMoney": 250,
+    "effect": { "kind": "reduce_tool_cost", "toolId": "link_hover", "reduceSeconds": 1 }
+  },
+  {
+    "id": "upg-filtro-inteligente",
+    "name": "Smart Filter",
+    "description": "Highlights suspicious addresses in the inbox.",
+    "icon": "filter",
+    "priceMoney": 500,
+    "effect": { "kind": "highlight_suspicious_domains" }
+  },
+  {
+    "id": "upg-ia-assistente",
+    "name": "AI Assistant",
+    "description": "Reduces the time needed to consult the Corporate AI.",
+    "icon": "sparkles",
+    "priceMoney": 450,
+    "effect": { "kind": "reduce_tool_cost", "toolId": "ai_assistant", "reduceSeconds": 2 }
+  },
+  {
+    "id": "upg-lupa-digital",
+    "name": "Digital Magnifier",
+    "description": "Visually highlights suspicious links in the email body.",
+    "icon": "search",
+    "priceMoney": 350,
+    "effect": { "kind": "highlight_suspicious_links" }
+  }
+]

@@ -1,0 +1,7 @@
+# Godot 4 — arquivos gerados que NÃO devem ir pro git
+.godot/
+/android/
+/build/
+/export/
+export_presets.cfg
+*.tmp

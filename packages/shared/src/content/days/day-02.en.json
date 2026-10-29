@@ -1,0 +1,217 @@
+{
+  "id": "day-02",
+  "dayNumber": 2,
+  "title": "The routine gets tougher",
+  "description": "Lookalike links, fake WhatsApp and SMS messages, and a USB stick someone found. Watch the details.",
+  "difficultyRange": [2, 2],
+  "timeLimitSeconds": 300,
+  "isBossDay": false,
+  "events": [
+    {
+      "id": "d2-evt-burst",
+      "type": "message_burst",
+      "triggerAfterEmailIndex": 2,
+      "durationSeconds": 8,
+      "message": "Several messages arrive at the same time! The clock is ticking.",
+      "effect": { "kind": "timer_penalty", "seconds": 15 }
+    }
+  ],
+  "emails": [
+    {
+      "id": "d2-e01",
+      "dayId": "day-02",
+      "order": 1,
+      "subject": "You have a new message on WhatsApp Web",
+      "bodyHtml": "<p>A new message has arrived on your WhatsApp Web. To view it, confirm your session by clicking the link below.</p>",
+      "sender": {
+        "displayName": "WhatsApp",
+        "emailAddressRaw": "notificacoes@whatsapp-web-alerta.com",
+        "domain": "whatsapp-web-alerta.com",
+        "isSpoofed": true,
+        "spoofType": "display_name_spoof"
+      },
+      "links": [
+        { "id": "d2-e01-link1", "displayText": "View message", "actualUrl": "http://whatsapp-web-alerta.com/sessao/confirmar", "isMalicious": true }
+      ],
+      "attachments": [],
+      "headers": {
+        "fromServer": "mail.whatsapp-web-alerta.com",
+        "sourceIp": "45.146.164.22",
+        "spf": "fail",
+        "dkim": "none",
+        "dmarc": "fail",
+        "sentAt": "2026-07-21T09:15:00Z",
+        "routeHops": ["45.146.164.22"]
+      },
+      "internalDbRecord": { "senderStatus": "never_used", "notes": "No prior contact from this sender." },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "whatsapp_falso",
+      "tags": ["whatsapp_falso", "phishing", "link_malicioso"],
+      "difficulty": 2,
+      "investigationHints": [
+        { "toolId": "sender_address", "revealsField": "sender.domain", "summaryText": "WhatsApp doesn't notify you from an address like this. It's a random address, with no link to WhatsApp." },
+        { "toolId": "link_hover", "revealsField": "links[0].actualUrl", "summaryText": "The link doesn't lead to the official WhatsApp Web (web.whatsapp.com), but to an unknown address." },
+        { "toolId": "internal_db_lookup", "revealsField": "internalDbRecord", "summaryText": "Sender never used before." }
+      ],
+      "explanation": {
+        "short": "Fake WhatsApp notification used to steal a login session.",
+        "detailed": "WhatsApp never asks you to 'confirm your session' by email. The link does not go to web.whatsapp.com, and whoever sent it had never written to the company before — three signals that together leave no doubt.",
+        "conceptGlossaryId": "whatsapp_falso"
+      },
+      "idealInvestigationSeconds": 6
+    },
+    {
+      "id": "d2-e04",
+      "dayId": "day-02",
+      "order": 2,
+      "subject": "Action required: temporarily disable your two-step verification",
+      "bodyHtml": "<p>During our system migration, we ask that you temporarily turn off two-step verification on your account to avoid lockouts. Re-enable it after 24 hours.</p>",
+      "sender": {
+        "displayName": "Corporate IT",
+        "emailAddressRaw": "ti@suporte-corporativo-ti.com",
+        "domain": "suporte-corporativo-ti.com",
+        "isSpoofed": true,
+        "spoofType": "display_name_spoof"
+      },
+      "links": [
+        { "id": "d2-e04-link1", "displayText": "Manage authentication", "actualUrl": "http://suporte-corporativo-ti.com/mfa/desativar", "isMalicious": true }
+      ],
+      "attachments": [],
+      "headers": {
+        "fromServer": "mail.suporte-corporativo-ti.com",
+        "sourceIp": "194.135.33.9",
+        "spf": "fail",
+        "dkim": "fail",
+        "dmarc": "none",
+        "sentAt": "2026-07-21T13:20:00Z",
+        "routeHops": ["194.135.33.9"]
+      },
+      "aiAssistantHint": {
+        "phishingProbability": 88,
+        "isReliable": true,
+        "reasoning": "Asking you to turn off two-step verification by email is a known scam. And the email's checks did not match."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "mfa",
+      "tags": ["mfa", "engenharia_social", "phishing"],
+      "difficulty": 2,
+      "investigationHints": [
+        { "toolId": "sender_address", "revealsField": "sender.domain", "summaryText": "The address doesn't belong to the company or to any known IT vendor." },
+        { "toolId": "header_inspect", "revealsField": "headers", "summaryText": "The automatic checks did not match: it did not come from who it claims." },
+        { "toolId": "ai_assistant", "revealsField": "aiAssistantHint", "summaryText": "The helper points to a high chance of a scam, and this time it is right." }
+      ],
+      "explanation": {
+        "short": "A real IT team never asks you to turn off two-step verification.",
+        "detailed": "Two-step verification is one of the best defenses against account takeover. A real IT team never asks you to turn it off by email — that removes exactly the protection that stops someone from using a leaked password. Add to that the address that isn't the official one.",
+        "conceptGlossaryId": "mfa_nunca_desativar"
+      },
+      "idealInvestigationSeconds": 6
+    },
+    {
+      "id": "d2-e05",
+      "dayId": "day-02",
+      "order": 3,
+      "subject": "I found a USB drive in the parking lot, is it yours?",
+      "bodyHtml": "<p>Hi! I found a USB drive lying near the store entrance with a sticker showing initials similar to yours. I took photos of the contents before turning it in at the front desk — take a look at the attachment to see if it's yours.</p>",
+      "sender": {
+        "displayName": "Marcos (Store 12)",
+        "emailAddressRaw": "marcos.loja12@gmail.com",
+        "domain": "gmail.com",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d2-e05-att1",
+          "fileName": "usb_photos_content.zip",
+          "declaredExtension": ".zip",
+          "actualType": "application/x-msdownload",
+          "sizeKB": 340,
+          "hasMacro": false,
+          "isMalicious": true,
+          "sandboxResult": { "outcome": "process_creation", "processName": "svhost32.exe" }
+        }
+      ],
+      "headers": {
+        "fromServer": "mail.gmail.com",
+        "sourceIp": "209.85.220.41",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-07-21T11:45:00Z",
+        "routeHops": ["209.85.220.41"]
+      },
+      "internalDbRecord": { "senderStatus": "never_used", "notes": "No employee with this name registered at Store 12." },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "usb_infectado",
+      "tags": ["usb_infectado", "anexo_perigoso", "malware", "engenharia_social"],
+      "difficulty": 2,
+      "investigationHints": [
+        { "toolId": "attachment_analysis", "revealsField": "attachments[0].actualType", "summaryText": "The '.zip' file is actually a Windows program, not photos." },
+        { "toolId": "sandbox_execution", "revealsField": "attachments[0].sandboxResult", "summaryText": "In the sandbox, the file created a process with a name that mimics a system process (svhost32.exe, not svchost.exe)." },
+        { "toolId": "internal_db_lookup", "revealsField": "internalDbRecord", "summaryText": "No employee with that name is registered at the mentioned store." }
+      ],
+      "explanation": {
+        "short": "Classic 'lost USB drive' bait adapted for email.",
+        "detailed": "The 'lost USB drive' scam usually means leaving an infected drive in a public place for someone to plug in out of curiosity. Here the bait comes by email, in a file pretending to be photos. The 'zip' is actually a harmful program in disguise.",
+        "conceptGlossaryId": "usb_infectado"
+      },
+      "idealInvestigationSeconds": 9
+    },
+    {
+      "id": "d2-e06",
+      "dayId": "day-02",
+      "order": 4,
+      "subject": "Registration open: information security training",
+      "bodyHtml": "<p>Hello! Registration for this month's in-person information security training is now open. Spots are limited, sign up through the internal training system.</p>",
+      "sender": {
+        "displayName": "Leroy Merlin Training",
+        "emailAddressRaw": "treinamentos@leroymerlin.com.br",
+        "domain": "leroymerlin.com.br",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [
+        { "id": "d2-e06-link1", "displayText": "View registrations", "actualUrl": "https://portal.leroymerlin.com.br/treinamentos", "isMalicious": false }
+      ],
+      "attachments": [],
+      "certificate": {
+        "companyName": "Leroy Merlin Brasil",
+        "issuer": "DigiCert",
+        "validFrom": "2026-03-01T00:00:00Z",
+        "validTo": "2027-03-01T00:00:00Z",
+        "domain": "portal.leroymerlin.com.br",
+        "isTechnicallyValid": true,
+        "isTrustworthy": true
+      },
+      "headers": {
+        "fromServer": "mail.leroymerlin.com.br",
+        "sourceIp": "200.150.10.21",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-07-21T07:50:00Z",
+        "routeHops": ["200.150.10.21"]
+      },
+      "riskLevel": "safe",
+      "correctAction": "accept",
+      "primaryConcept": "legitimo",
+      "tags": ["legitimo"],
+      "difficulty": 2,
+      "investigationHints": [
+        { "toolId": "sender_address", "revealsField": "sender.domain", "summaryText": "Company's official address." },
+        { "toolId": "certificate_view", "revealsField": "certificate", "summaryText": "The padlock is valid and was issued for the company's official address." }
+      ],
+      "explanation": {
+        "short": "Legitimate internal announcement.",
+        "detailed": "Official address, link to the real portal, no rush and no request for data. Every sign points to a real email.",
+        "conceptGlossaryId": "nem_tudo_e_phishing"
+      },
+      "idealInvestigationSeconds": 4
+    }
+  ]
+}

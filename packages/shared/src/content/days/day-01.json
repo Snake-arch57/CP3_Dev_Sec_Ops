@@ -1,0 +1,301 @@
+{
+  "id": "day-01",
+  "dayNumber": 1,
+  "title": "Primeiro dia na Leroy Merlin",
+  "description": "E-mails falsos que dá para perceber de longe. Aprenda os sinais mais simples.",
+  "difficultyRange": [1, 1],
+  "timeLimitSeconds": 240,
+  "isBossDay": false,
+  "events": [],
+  "emails": [
+    {
+      "id": "d1-e01",
+      "dayId": "day-01",
+      "order": 1,
+      "subject": "Sua conta será bloqueada em 24h!!!",
+      "bodyHtml": "<p>Prezado colaborador,</p><p>Identificamos uma atividade suspeita em sua conta corporativa. Para evitar o <strong>bloqueio em 24 horas</strong>, clique no botão abaixo e regularize seus dados imediatamente.</p>",
+      "sender": {
+        "displayName": "TI Leroy Merlin",
+        "emailAddressRaw": "suporte@leroymerlin-ti.com.br",
+        "domain": "leroymerlin-ti.com.br",
+        "isSpoofed": true,
+        "spoofType": "lookalike_domain"
+      },
+      "links": [
+        {
+          "id": "d1-e01-link1",
+          "displayText": "Regularizar agora",
+          "actualUrl": "http://leroymerlin-ti.com.br/login-seguro",
+          "isMalicious": true
+        }
+      ],
+      "attachments": [],
+      "internalDbRecord": {
+        "senderStatus": "recently_created_domain",
+        "notes": "Endereço criado há 6 dias. Nunca mandou e-mail para a empresa antes."
+      },
+      "aiAssistantHint": {
+        "phishingProbability": 91,
+        "isReliable": true,
+        "reasoning": "O endereço foi criado há poucos dias e a mensagem manda correr. Essa dupla quase sempre é golpe."
+      },
+      "headers": {
+        "fromServer": "mail.leroymerlin-ti.com.br",
+        "sourceIp": "185.220.101.5",
+        "spf": "fail",
+        "dkim": "none",
+        "dmarc": "fail",
+        "sentAt": "2026-07-20T03:12:00Z",
+        "routeHops": ["185.220.101.5", "smtp-relay-04.unknown-host.ru"]
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "phishing",
+      "tags": ["phishing", "engenharia_social", "link_malicioso"],
+      "difficulty": 1,
+      "investigationHints": [
+        {
+          "toolId": "sender_address",
+          "revealsField": "sender.domain",
+          "summaryText": "O endereço 'leroymerlin-ti.com.br' não é o da empresa. Foi feito só para parecer que é."
+        },
+        {
+          "toolId": "link_hover",
+          "revealsField": "links[0].actualUrl",
+          "summaryText": "O botão leva para o mesmo endereço falso, não para o site oficial da empresa."
+        },
+        {
+          "toolId": "domain_inspect",
+          "revealsField": "sender.domain",
+          "summaryText": "O endereço fica fora do Brasil e ninguém conhece."
+        },
+        {
+          "toolId": "header_inspect",
+          "revealsField": "headers",
+          "summaryText": "As checagens automáticas do e-mail falharam, e ele veio de fora do Brasil. Tudo indica que quem mandou não é quem diz ser."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "Esse endereço foi criado há só 6 dias. Empresa de verdade não manda de endereço novinho assim."
+        },
+        {
+          "toolId": "ai_assistant",
+          "revealsField": "aiAssistantHint",
+          "summaryText": "A ferramenta de apoio aponta forte chance de golpe, e acerta neste caso."
+        }
+      ],
+      "explanation": {
+        "short": "Endereço parecido com o da empresa e pressa. É golpe.",
+        "detailed": "O endereço 'leroymerlin-ti.com.br' se parece com o da empresa, mas não é o mesmo. E o e-mail te apressa ('bloqueio em 24h') para você clicar sem pensar. Da próxima vez, desconfie de endereço parecido, mas não igual, ao oficial.",
+        "conceptGlossaryId": "phishing_urgencia"
+      },
+      "idealInvestigationSeconds": 5
+    },
+    {
+      "id": "d1-e02",
+      "dayId": "day-01",
+      "order": 2,
+      "subject": "Nota fiscal em atraso - urgente",
+      "bodyHtml": "<p>Olá,</p><p>Segue em anexo a nota fiscal referente ao pedido 2854, que está em atraso. Por favor, efetue o pagamento hoje para evitar multas.</p>",
+      "sender": {
+        "displayName": "Financeiro Fornecedor ABC",
+        "emailAddressRaw": "financeiro@fornecedorabc.com",
+        "domain": "fornecedorabc.com",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d1-e02-att1",
+          "fileName": "nota_fiscal_2854.pdf.exe",
+          "declaredExtension": ".pdf",
+          "actualType": "application/x-msdownload",
+          "sizeKB": 812,
+          "hasMacro": false,
+          "isMalicious": true,
+          "sandboxResult": {
+            "outcome": "ransomware_attempt",
+            "details": "O arquivo tentou criptografar documentos na pasta Documentos assim que foi executado."
+          }
+        }
+      ],
+      "certificate": {
+        "companyName": "Fornecedor ABC LTDA",
+        "issuer": "Let's Encrypt",
+        "validFrom": "2026-06-01T00:00:00Z",
+        "validTo": "2026-09-01T00:00:00Z",
+        "domain": "fornecedorabc.com",
+        "isTechnicallyValid": true,
+        "isTrustworthy": false
+      },
+      "internalDbRecord": {
+        "senderStatus": "trusted_vendor",
+        "notes": "Fornecedor ativo há 3 anos. Nenhuma verificação de segurança recente registrada."
+      },
+      "aiAssistantHint": {
+        "phishingProbability": 38,
+        "isReliable": false,
+        "reasoning": "Quem mandou e o endereço parecem de verdade. Mas esta ajuda não abre o anexo, e o arquivo é um programa disfarçado."
+      },
+      "headers": {
+        "fromServer": "mail.fornecedorabc.com",
+        "sourceIp": "201.45.12.9",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-07-20T09:40:00Z",
+        "routeHops": ["201.45.12.9"]
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "anexo_perigoso",
+      "tags": ["anexo_perigoso", "malware", "ransomware"],
+      "difficulty": 1,
+      "investigationHints": [
+        {
+          "toolId": "attachment_analysis",
+          "revealsField": "attachments[0].fileName",
+          "summaryText": "O arquivo termina em '.exe', não em '.pdf'. É um programa disfarçado de documento."
+        },
+        {
+          "toolId": "certificate_view",
+          "revealsField": "certificate",
+          "summaryText": "O cadeado do site funciona, mas isso não garante que quem enviou é de confiança."
+        },
+        {
+          "toolId": "sandbox_execution",
+          "revealsField": "attachments[0].sandboxResult",
+          "summaryText": "Ao ser testado, o arquivo tentou trancar documentos — como fazem os programas que pedem resgate."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "O fornecedor é conhecido, mas a conta dele pode ter sido invadida."
+        },
+        {
+          "toolId": "ai_assistant",
+          "revealsField": "aiAssistantHint",
+          "summaryText": "A ferramenta de apoio errou desta vez: não olha o conteúdo real do anexo."
+        }
+      ],
+      "explanation": {
+        "short": "Um arquivo que finge ser PDF, mas é um programa.",
+        "detailed": "O anexo 'nota_fiscal_2854.pdf.exe' parece um PDF, mas termina em '.exe': é um programa, não um documento. Programa que chega assim por e-mail costuma trancar seus arquivos e pedir dinheiro. Não abra.",
+        "conceptGlossaryId": "certificado_nao_garante_legitimidade"
+      },
+      "idealInvestigationSeconds": 10
+    },
+    {
+      "id": "d1-e03",
+      "dayId": "day-01",
+      "order": 3,
+      "subject": "🎉 Resgate seus pontos de fidelidade agora!",
+      "bodyHtml": "<p>Parabéns! Você acumulou pontos suficientes para trocar por um vale-compras. Escaneie o QR Code abaixo antes que expire hoje à meia-noite.</p>",
+      "sender": {
+        "displayName": "Programa de Benefícios",
+        "emailAddressRaw": "beneficios@promocoes-parceiras.net",
+        "domain": "promocoes-parceiras.net",
+        "isSpoofed": true,
+        "spoofType": "display_name_spoof"
+      },
+      "links": [],
+      "attachments": [],
+      "qrCode": {
+        "imageAsset": "qr-fake-rewards.png",
+        "decodedUrl": "http://resgate-pontos-cliente.xyz/confirmar-dados",
+        "isMalicious": true
+      },
+      "internalDbRecord": {
+        "senderStatus": "never_used",
+        "notes": "A empresa nunca recebeu e-mail deste endereço antes."
+      },
+      "headers": {
+        "fromServer": "mail.promocoes-parceiras.net",
+        "sourceIp": "91.234.56.12",
+        "spf": "fail",
+        "dkim": "fail",
+        "dmarc": "fail",
+        "sentAt": "2026-07-20T14:05:00Z",
+        "routeHops": ["91.234.56.12"]
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "qr_falso",
+      "tags": ["qr_falso", "phishing", "engenharia_social"],
+      "difficulty": 1,
+      "investigationHints": [
+        {
+          "toolId": "sender_address",
+          "revealsField": "sender.domain",
+          "summaryText": "O endereço 'promocoes-parceiras.net' não tem nada a ver com a empresa nem com programa de pontos."
+        },
+        {
+          "toolId": "qr_preview",
+          "revealsField": "qrCode.decodedUrl",
+          "summaryText": "O QR Code leva a um site desconhecido que pede seus dados. Não é o site oficial."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "Quem mandou nunca escreveu para a empresa antes. Não faz parte de programa nenhum."
+        }
+      ],
+      "explanation": {
+        "short": "QR Code falso, com isca de prêmio e pressa.",
+        "detailed": "A promessa de prêmio com prazo curto ('antes da meia-noite') serve para você agir sem pensar. Antes de ler um QR Code, dá para ver aonde ele leva: aqui, vai para um site que pede seus dados. É golpe.",
+        "conceptGlossaryId": "qr_code_golpe"
+      },
+      "idealInvestigationSeconds": 5
+    },
+    {
+      "id": "d1-e04",
+      "dayId": "day-01",
+      "order": 4,
+      "subject": "Cronograma de manutenção do estacionamento",
+      "bodyHtml": "<p>Prezados colaboradores,</p><p>Informamos que o estacionamento da loja passará por manutenção na garagem B na próxima segunda-feira, das 8h às 12h. Por favor, utilizem a garagem A durante esse período.</p><p>Att, Facilities</p>",
+      "sender": {
+        "displayName": "Facilities Leroy Merlin",
+        "emailAddressRaw": "facilities@leroymerlin.com.br",
+        "domain": "leroymerlin.com.br",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [],
+      "attachments": [],
+      "headers": {
+        "fromServer": "mail.leroymerlin.com.br",
+        "sourceIp": "200.150.10.20",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-07-20T08:00:00Z",
+        "routeHops": ["200.150.10.20"]
+      },
+      "riskLevel": "safe",
+      "correctAction": "accept",
+      "primaryConcept": "legitimo",
+      "tags": ["legitimo"],
+      "difficulty": 1,
+      "investigationHints": [
+        {
+          "toolId": "sender_address",
+          "revealsField": "sender.domain",
+          "summaryText": "O endereço 'leroymerlin.com.br' é o oficial da empresa."
+        },
+        {
+          "toolId": "header_inspect",
+          "revealsField": "headers",
+          "summaryText": "As checagens automáticas do e-mail passaram — veio mesmo da empresa."
+        }
+      ],
+      "explanation": {
+        "short": "E-mail interno de verdade. Pode confiar.",
+        "detailed": "Nem todo e-mail é ameaça. Dizer que um comunicado de verdade é golpe só atrapalha a equipe. Este vem do endereço oficial, não te apressa, não pede dados e não tem link nem anexo suspeito.",
+        "conceptGlossaryId": "nem_tudo_e_phishing"
+      },
+      "idealInvestigationSeconds": 3
+    }
+  ]
+}

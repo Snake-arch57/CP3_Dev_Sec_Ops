@@ -1,0 +1,13 @@
+O jogador acorda em um personagem perdido na empresa, quando ele ve a empresa está toda infectada por Malware e o objetivo do jogador é localizar esses malwarer que estão destruindo a empresa e deter eles, e para isso tera alguns mini games para ele realizar e detec esses malwarer assim librando a empresa da infecção de malware.
+
+Idealização:
+
+	Inicio: persinagem principal e mais um NPC, o cenario vai subir com tudo tremendo, telas de computador piscando e avisso de perigo, o NPC fala com nosso personagem falando que a empresa foi infectada por malwarer e que o sistema caiu, e para deter os malwarer precisaremos ir nos setres afetados e manualmente em cada setor deter o malware. Mas não conseguimos ver o Malware pois ele não é palpavel, então temos de ir ao laboratio da empresa concersar com o profesor para usarmos uma nova tecnologia para levar o nosso cerebro para o "Mundo Virtual", onde nesse mundo tera uma replica dos setores da empresa em total caos completo, e nesse mundo ele tem de detec os Malware.
+	Cada Malware contara com seu proprios pazzel e nivel de dificuldade e uma breve historis dele, como foi criado e funciona e afins.
+	Nesse meio tempo em que ele vai desbravando esse Mundo Virtual ele vai descobrindo pistas do que ocorreu na empresa para ela ser infectada, assim achando a origem do vazamento
+	Nosso personagem somente consegue se comunicar com o mundo  real com alguns poucos computadores que ele vai encontrando na jornada, mas eles estão infectados, portanto cada computador tera um puzzel para desenfectalos e porder ultilizalos e se comunicar com o profesor.
+	
+	
+Itens:
+	Mapa Digital: Uma mapa coletavel logo no inicio da jornada em que mostra os setores infectados com o Malwer e os setores já desenfectado, mostrando tbm o nivel de cada seotr
+	

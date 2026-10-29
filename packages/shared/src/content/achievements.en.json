@@ -1,0 +1,47 @@
+[
+  {
+    "id": "ach-cacador-phishing",
+    "title": "Scam Hunter",
+    "description": "Get 6 fake emails right.",
+    "icon": "fish",
+    "criteria": { "kind": "concept_mastered", "concept": "phishing", "correctCount": 6 },
+    "xpReward": 200,
+    "moneyReward": 100
+  },
+  {
+    "id": "ach-guardiao-empresa",
+    "title": "Company Guardian",
+    "description": "Complete 3 phases.",
+    "icon": "shield",
+    "criteria": { "kind": "phases_completed", "count": 3 },
+    "xpReward": 300,
+    "moneyReward": 150
+  },
+  {
+    "id": "ach-mestre-links",
+    "title": "Eye on the Link",
+    "description": "Get 3 emails with a dangerous link right.",
+    "icon": "link",
+    "criteria": { "kind": "concept_mastered", "concept": "link_malicioso", "correctCount": 3 },
+    "xpReward": 200,
+    "moneyReward": 100
+  },
+  {
+    "id": "ach-especialista-malware",
+    "title": "Suspicious Attachment",
+    "description": "Get 2 emails with a dangerous file right.",
+    "icon": "bug",
+    "criteria": { "kind": "concept_mastered", "concept": "malware", "correctCount": 2 },
+    "xpReward": 250,
+    "moneyReward": 125
+  },
+  {
+    "id": "ach-100-emails-perfeitos",
+    "title": "Clean Inbox",
+    "description": "Get 20 emails right in total.",
+    "icon": "check-check",
+    "criteria": { "kind": "perfect_emails_total", "count": 20 },
+    "xpReward": 500,
+    "moneyReward": 250
+  }
+]

@@ -1,0 +1,36 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# A partir do pnpm 10 estes ajustes moraram do package.json para cá.
+#
+# postcss e nanoid: correções de XSS e path traversal via sourceMappingURL.
+# sharp: vulnerabilidades herdadas do libvips. É dependência opcional do Next
+#   para next/image, que nenhum dos apps usa — o override só evita que o
+#   `pnpm audit` acuse, sem forçar migração de major.
+#
+# `pnpm audit --prod` deve reportar zero. Se voltar a acusar, é aqui que se mexe.
+overrides:
+  postcss: ^8.5.23
+  nanoid: ^3.3.17
+  # 0.35.4 corrige a falha herdada do libvips que o audit apontava em <0.35.4.
+  sharp: ^0.35.4
+  # Transitivas que o NestJS 11 ainda arrasta em versão vulnerável.
+  # qs precisa de 6.16.0: as falhas cobrem tudo abaixo disso.
+  qs: ^6.16.0
+  # multer vem do @nestjs/platform-express. A API não recebe upload de arquivo
+  # em lugar nenhum, mas o audit acusa mesmo assim.
+  multer: ^2.4.0
+  body-parser: ^1.20.6
+
+allowBuilds:
+  '@nestjs/core': true
+  '@prisma/client': true
+  '@prisma/engines': true
+  esbuild: true
+  prisma: true
+  sharp: true
+  unrs-resolver: true
+
+onlyBuiltDependencies:
+  - esbuild

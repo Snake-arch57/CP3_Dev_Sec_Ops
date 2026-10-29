@@ -1,0 +1,301 @@
+{
+  "id": "day-01",
+  "dayNumber": 1,
+  "title": "First day at Leroy Merlin",
+  "description": "Fake emails you can spot a mile away. Learn the simplest signs.",
+  "difficultyRange": [1, 1],
+  "timeLimitSeconds": 240,
+  "isBossDay": false,
+  "events": [],
+  "emails": [
+    {
+      "id": "d1-e01",
+      "dayId": "day-01",
+      "order": 1,
+      "subject": "Your account will be blocked in 24h!!!",
+      "bodyHtml": "<p>Dear employee,</p><p>We have identified suspicious activity on your corporate account. To avoid <strong>blocking within 24 hours</strong>, click the button below and update your information immediately.</p>",
+      "sender": {
+        "displayName": "Leroy Merlin IT",
+        "emailAddressRaw": "suporte@leroymerlin-ti.com.br",
+        "domain": "leroymerlin-ti.com.br",
+        "isSpoofed": true,
+        "spoofType": "lookalike_domain"
+      },
+      "links": [
+        {
+          "id": "d1-e01-link1",
+          "displayText": "Update now",
+          "actualUrl": "http://leroymerlin-ti.com.br/login-seguro",
+          "isMalicious": true
+        }
+      ],
+      "attachments": [],
+      "internalDbRecord": {
+        "senderStatus": "recently_created_domain",
+        "notes": "Address created 6 days ago. Never emailed the company before."
+      },
+      "aiAssistantHint": {
+        "phishingProbability": 91,
+        "isReliable": true,
+        "reasoning": "The address was created days ago and the message tells you to hurry. That pair is almost always a scam."
+      },
+      "headers": {
+        "fromServer": "mail.leroymerlin-ti.com.br",
+        "sourceIp": "185.220.101.5",
+        "spf": "fail",
+        "dkim": "none",
+        "dmarc": "fail",
+        "sentAt": "2026-07-20T03:12:00Z",
+        "routeHops": ["185.220.101.5", "smtp-relay-04.unknown-host.ru"]
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "phishing",
+      "tags": ["phishing", "engenharia_social", "link_malicioso"],
+      "difficulty": 1,
+      "investigationHints": [
+        {
+          "toolId": "sender_address",
+          "revealsField": "sender.domain",
+          "summaryText": "The address 'leroymerlin-ti.com.br' is not the company's. It was made only to look like it."
+        },
+        {
+          "toolId": "link_hover",
+          "revealsField": "links[0].actualUrl",
+          "summaryText": "The button leads to the same fake address, not to the company's official site."
+        },
+        {
+          "toolId": "domain_inspect",
+          "revealsField": "sender.domain",
+          "summaryText": "The address is hosted outside Brazil and no one knows it."
+        },
+        {
+          "toolId": "header_inspect",
+          "revealsField": "headers",
+          "summaryText": "The email's automatic checks failed, and it came from outside Brazil. Everything points to a fake sender."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "This address was created only 6 days ago. Real companies don't send from brand-new addresses like that."
+        },
+        {
+          "toolId": "ai_assistant",
+          "revealsField": "aiAssistantHint",
+          "summaryText": "The support tool flags a high chance of a scam, and it's right this time."
+        }
+      ],
+      "explanation": {
+        "short": "An address that looks like the company's, plus pressure. It's a scam.",
+        "detailed": "The address 'leroymerlin-ti.com.br' looks like the company's, but it isn't the same. And the email rushes you ('blocked in 24h') so you click without thinking. Next time, be suspicious of an address that looks similar, but isn't identical, to the official one.",
+        "conceptGlossaryId": "phishing_urgencia"
+      },
+      "idealInvestigationSeconds": 5
+    },
+    {
+      "id": "d1-e02",
+      "dayId": "day-01",
+      "order": 2,
+      "subject": "Overdue invoice - urgent",
+      "bodyHtml": "<p>Hello,</p><p>Attached is the invoice for order 2854, which is overdue. Please make the payment today to avoid late fees.</p>",
+      "sender": {
+        "displayName": "Vendor ABC Finance",
+        "emailAddressRaw": "financeiro@fornecedorabc.com",
+        "domain": "fornecedorabc.com",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d1-e02-att1",
+          "fileName": "invoice_2854.pdf.exe",
+          "declaredExtension": ".pdf",
+          "actualType": "application/x-msdownload",
+          "sizeKB": 812,
+          "hasMacro": false,
+          "isMalicious": true,
+          "sandboxResult": {
+            "outcome": "ransomware_attempt",
+            "details": "The file attempted to encrypt documents in the Documents folder as soon as it was executed."
+          }
+        }
+      ],
+      "certificate": {
+        "companyName": "Fornecedor ABC LTDA",
+        "issuer": "Let's Encrypt",
+        "validFrom": "2026-06-01T00:00:00Z",
+        "validTo": "2026-09-01T00:00:00Z",
+        "domain": "fornecedorabc.com",
+        "isTechnicallyValid": true,
+        "isTrustworthy": false
+      },
+      "internalDbRecord": {
+        "senderStatus": "trusted_vendor",
+        "notes": "Vendor active for 3 years. No recent security review on record."
+      },
+      "aiAssistantHint": {
+        "phishingProbability": 38,
+        "isReliable": false,
+        "reasoning": "The sender and the address look real. But this helper does not open the attachment, and the file is a program in disguise."
+      },
+      "headers": {
+        "fromServer": "mail.fornecedorabc.com",
+        "sourceIp": "201.45.12.9",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-07-20T09:40:00Z",
+        "routeHops": ["201.45.12.9"]
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "anexo_perigoso",
+      "tags": ["anexo_perigoso", "malware", "ransomware"],
+      "difficulty": 1,
+      "investigationHints": [
+        {
+          "toolId": "attachment_analysis",
+          "revealsField": "attachments[0].fileName",
+          "summaryText": "The file ends in '.exe', not '.pdf'. It's a program disguised as a document."
+        },
+        {
+          "toolId": "certificate_view",
+          "revealsField": "certificate",
+          "summaryText": "The site's padlock works, but that doesn't guarantee the sender is trustworthy."
+        },
+        {
+          "toolId": "sandbox_execution",
+          "revealsField": "attachments[0].sandboxResult",
+          "summaryText": "When tested, the file tried to lock documents — like programs that demand a ransom do."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "The vendor is known, but their account may have been hacked."
+        },
+        {
+          "toolId": "ai_assistant",
+          "revealsField": "aiAssistantHint",
+          "summaryText": "The support tool got it wrong this time: it doesn't look at the actual content of the attachment."
+        }
+      ],
+      "explanation": {
+        "short": "A file pretending to be a PDF, but it's a program.",
+        "detailed": "The attachment 'invoice_2854.pdf.exe' looks like a PDF, but it ends in '.exe': it's a program, not a document. A program that arrives by email like this usually locks your files and demands money. Don't open it.",
+        "conceptGlossaryId": "certificado_nao_garante_legitimidade"
+      },
+      "idealInvestigationSeconds": 10
+    },
+    {
+      "id": "d1-e03",
+      "dayId": "day-01",
+      "order": 3,
+      "subject": "🎉 Redeem your loyalty points now!",
+      "bodyHtml": "<p>Congratulations! You've earned enough points to redeem for a shopping voucher. Scan the QR code below before it expires tonight at midnight.</p>",
+      "sender": {
+        "displayName": "Benefits Program",
+        "emailAddressRaw": "beneficios@promocoes-parceiras.net",
+        "domain": "promocoes-parceiras.net",
+        "isSpoofed": true,
+        "spoofType": "display_name_spoof"
+      },
+      "links": [],
+      "attachments": [],
+      "qrCode": {
+        "imageAsset": "qr-fake-rewards.png",
+        "decodedUrl": "http://resgate-pontos-cliente.xyz/confirmar-dados",
+        "isMalicious": true
+      },
+      "internalDbRecord": {
+        "senderStatus": "never_used",
+        "notes": "No email from this sender has ever been received by the company before."
+      },
+      "headers": {
+        "fromServer": "mail.promocoes-parceiras.net",
+        "sourceIp": "91.234.56.12",
+        "spf": "fail",
+        "dkim": "fail",
+        "dmarc": "fail",
+        "sentAt": "2026-07-20T14:05:00Z",
+        "routeHops": ["91.234.56.12"]
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "qr_falso",
+      "tags": ["qr_falso", "phishing", "engenharia_social"],
+      "difficulty": 1,
+      "investigationHints": [
+        {
+          "toolId": "sender_address",
+          "revealsField": "sender.domain",
+          "summaryText": "The address 'promocoes-parceiras.net' has nothing to do with the company or any points program."
+        },
+        {
+          "toolId": "qr_preview",
+          "revealsField": "qrCode.decodedUrl",
+          "summaryText": "The QR code leads to an unknown site that asks for your data. It's not the official site."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "This sender has never written to the company. It isn't part of any program."
+        }
+      ],
+      "explanation": {
+        "short": "Fake QR code, with a prize and pressure as bait.",
+        "detailed": "The promise of a prize with a short deadline ('before midnight') is there to make you act without thinking. Before scanning a QR code, you can see where it leads: here, it goes to a site asking for your data. It's a scam.",
+        "conceptGlossaryId": "qr_code_golpe"
+      },
+      "idealInvestigationSeconds": 5
+    },
+    {
+      "id": "d1-e04",
+      "dayId": "day-01",
+      "order": 4,
+      "subject": "Parking lot maintenance schedule",
+      "bodyHtml": "<p>Dear employees,</p><p>We would like to inform you that the store's parking lot will undergo maintenance in Garage B next Monday, from 8am to 12pm. Please use Garage A during this period.</p><p>Regards, Facilities</p>",
+      "sender": {
+        "displayName": "Leroy Merlin Facilities",
+        "emailAddressRaw": "facilities@leroymerlin.com.br",
+        "domain": "leroymerlin.com.br",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [],
+      "attachments": [],
+      "headers": {
+        "fromServer": "mail.leroymerlin.com.br",
+        "sourceIp": "200.150.10.20",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-07-20T08:00:00Z",
+        "routeHops": ["200.150.10.20"]
+      },
+      "riskLevel": "safe",
+      "correctAction": "accept",
+      "primaryConcept": "legitimo",
+      "tags": ["legitimo"],
+      "difficulty": 1,
+      "investigationHints": [
+        {
+          "toolId": "sender_address",
+          "revealsField": "sender.domain",
+          "summaryText": "The address 'leroymerlin.com.br' is the company's official one."
+        },
+        {
+          "toolId": "header_inspect",
+          "revealsField": "headers",
+          "summaryText": "The email's automatic checks passed — it really came from the company."
+        }
+      ],
+      "explanation": {
+        "short": "A real internal email. You can trust it.",
+        "detailed": "Not every email is a threat. Calling a real message a scam only disrupts the team. This one comes from the official address, doesn't rush you, doesn't ask for data, and has no suspicious link or attachment.",
+        "conceptGlossaryId": "nem_tudo_e_phishing"
+      },
+      "idealInvestigationSeconds": 3
+    }
+  ]
+}

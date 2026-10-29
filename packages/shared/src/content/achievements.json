@@ -1,0 +1,47 @@
+[
+  {
+    "id": "ach-cacador-phishing",
+    "title": "Caçador de Golpes",
+    "description": "Acerte 6 e-mails falsos.",
+    "icon": "fish",
+    "criteria": { "kind": "concept_mastered", "concept": "phishing", "correctCount": 6 },
+    "xpReward": 200,
+    "moneyReward": 100
+  },
+  {
+    "id": "ach-guardiao-empresa",
+    "title": "Guardião da Empresa",
+    "description": "Complete 3 fases.",
+    "icon": "shield",
+    "criteria": { "kind": "phases_completed", "count": 3 },
+    "xpReward": 300,
+    "moneyReward": 150
+  },
+  {
+    "id": "ach-mestre-links",
+    "title": "Olho no Link",
+    "description": "Acerte 3 e-mails com link perigoso.",
+    "icon": "link",
+    "criteria": { "kind": "concept_mastered", "concept": "link_malicioso", "correctCount": 3 },
+    "xpReward": 200,
+    "moneyReward": 100
+  },
+  {
+    "id": "ach-especialista-malware",
+    "title": "Anexo Suspeito",
+    "description": "Acerte 2 e-mails com arquivo perigoso.",
+    "icon": "bug",
+    "criteria": { "kind": "concept_mastered", "concept": "malware", "correctCount": 2 },
+    "xpReward": 250,
+    "moneyReward": 125
+  },
+  {
+    "id": "ach-100-emails-perfeitos",
+    "title": "Caixa Limpa",
+    "description": "Acerte 20 e-mails no total.",
+    "icon": "check-check",
+    "criteria": { "kind": "perfect_emails_total", "count": 20 },
+    "xpReward": 500,
+    "moneyReward": 250
+  }
+]

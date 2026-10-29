@@ -1,0 +1,302 @@
+{
+  "id": "day-06",
+  "dayNumber": 6,
+  "title": "O dia mais longo",
+  "description": "Dia de chefe. Vários ataques coordenados ao mesmo tempo, sistema instável, e pelo menos uma vez a resposta certa não é a mais óbvia.",
+  "difficultyRange": [6, 7],
+  "timeLimitSeconds": 420,
+  "isBossDay": true,
+  "events": [
+    {
+      "id": "d6-ev1",
+      "type": "slow_internet",
+      "triggerAfterEmailIndex": 0,
+      "durationSeconds": 12,
+      "message": "A internet está lenta hoje — parece que a rede está sob carga incomum.",
+      "effect": { "kind": "timer_penalty", "seconds": 15 }
+    },
+    {
+      "id": "d6-ev2",
+      "type": "system_crash",
+      "triggerAfterEmailIndex": 2,
+      "durationSeconds": 10,
+      "message": "A tela trava por um instante. Pode ser reflexo do ataque em andamento.",
+      "effect": { "kind": "ui_distraction", "variant": "lag_glitch" }
+    },
+    {
+      "id": "d6-ev3",
+      "type": "message_burst",
+      "triggerAfterEmailIndex": 4,
+      "durationSeconds": 6,
+      "message": "'A auditoria chegou HOJE, preciso do relatório de compliance AGORA ou vamos ter problemas sérios.' — mensagem urgente da diretoria.",
+      "effect": { "kind": "ui_distraction", "variant": "boss_popup" }
+    }
+  ],
+  "emails": [
+    {
+      "id": "d6-e02",
+      "dayId": "day-06",
+      "order": 1,
+      "subject": "Áudio urgente do diretor - ouça antes de agir",
+      "bodyHtml": "<p>Segue o áudio que o diretor Ricardo gravou no carro a caminho do aeroporto, pedindo pra você desativar temporariamente o firewall da filial para o time de auditoria externa acessar remotamente hoje.</p><p>Arquivo de áudio anexado, 0:38.</p>",
+      "sender": {
+        "displayName": "Secretaria da Diretoria",
+        "emailAddressRaw": "secretaria@leroymerlin-diretoria.com",
+        "domain": "leroymerlin-diretoria.com",
+        "isSpoofed": true,
+        "spoofType": "lookalike_domain"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d6-e02-att1",
+          "fileName": "audio_diretor_urgente.mp3.exe",
+          "declaredExtension": ".mp3",
+          "actualType": "application/x-msdownload",
+          "sizeKB": 480,
+          "hasMacro": false,
+          "isMalicious": true,
+          "sandboxResult": {
+            "outcome": "suspicious_connection",
+            "host": "185.220.101.77"
+          }
+        }
+      ],
+      "headers": {
+        "fromServer": "mail.leroymerlin-diretoria.com",
+        "sourceIp": "185.220.101.77",
+        "spf": "fail",
+        "dkim": "none",
+        "dmarc": "fail",
+        "sentAt": "2026-08-12T09:40:00Z",
+        "routeHops": ["185.220.101.77"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "recently_created_domain",
+        "notes": "Endereço criado há 3 dias. Nenhuma 'Secretaria da Diretoria' pede coisas de segurança por e-mail."
+      },
+      "outOfBandCheck": {
+        "channelDescription": "Ligação para o ramal cadastrado do Diretor Ricardo Almeida",
+        "outcome": "confirmed_fraud",
+        "details": "O diretor confirmou que não gravou nenhum áudio e que jamais pediria para desativar o firewall por email."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "deepfake",
+      "tags": ["deepfake", "bec", "engenharia_social", "anexo_perigoso"],
+      "difficulty": 7,
+      "investigationHints": [
+        {
+          "toolId": "attachment_analysis",
+          "revealsField": "attachments[0].fileName",
+          "summaryText": "'audio_diretor_urgente.mp3.exe' tem dois nomes de arquivo colados. Não é áudio, é um programa."
+        },
+        {
+          "toolId": "sandbox_execution",
+          "revealsField": "attachments[0].sandboxResult",
+          "summaryText": "Em sandbox, o arquivo tenta se conectar a um host externo suspeito."
+        },
+        {
+          "toolId": "out_of_band_verify",
+          "revealsField": "outOfBandCheck",
+          "summaryText": "O diretor de verdade, contatado por telefone, negou ter gravado qualquer áudio ou feito esse pedido."
+        }
+      ],
+      "explanation": {
+        "short": "Pedido de desativar controle de segurança, disfarçado de áudio urgente do diretor.",
+        "detailed": "O pedido já deveria acender o alerta: desligar a proteção da rede por causa de um e-mail é o tipo de decisão que nunca pode depender só de uma mensagem urgente. O 'áudio' é, na verdade, um programa disfarçado; o endereço de quem enviou é recente e imita o nome da diretoria; e o teste confirma que é perigoso. Pedido para desligar proteção de segurança sempre exige confirmar por mais de um canal — nunca só pelo que está escrito no próprio e-mail suspeito.",
+        "conceptGlossaryId": "deepfake"
+      },
+      "idealInvestigationSeconds": 18
+    },
+    {
+      "id": "d6-e03",
+      "dayId": "day-06",
+      "order": 2,
+      "subject": "Lembrete: treinamento de segurança obrigatório até sexta",
+      "bodyHtml": "<p>Olá,</p><p>Este é um lembrete automático de que o treinamento anual de segurança da informação deve ser concluído até sexta-feira. Acesse pelo portal interno de sempre, na aba 'Treinamentos'.</p>",
+      "sender": {
+        "displayName": "RH Leroy Merlin",
+        "emailAddressRaw": "rh@leroymerlin.com.br",
+        "domain": "leroymerlin.com.br",
+        "isSpoofed": false,
+        "spoofType": "none"
+      },
+      "links": [],
+      "attachments": [],
+      "headers": {
+        "fromServer": "mail.leroymerlin.com.br",
+        "sourceIp": "179.94.10.5",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-08-12T08:00:00Z",
+        "routeHops": ["179.94.10.5"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "trusted_vendor",
+        "notes": "Endereço oficial da empresa. É um comunicado que o RH manda sempre."
+      },
+      "riskLevel": "safe",
+      "correctAction": "accept",
+      "primaryConcept": "legitimo",
+      "tags": ["legitimo"],
+      "difficulty": 6,
+      "investigationHints": [
+        {
+          "toolId": "sender_address",
+          "revealsField": "sender.domain",
+          "summaryText": "Vem do endereço oficial da empresa, e não tem link nem anexo."
+        },
+        {
+          "toolId": "header_inspect",
+          "revealsField": "headers",
+          "summaryText": "As conferências automáticas bateram: o e-mail é mesmo da empresa."
+        }
+      ],
+      "explanation": {
+        "short": "Comunicado interno de RH, sem links, sem urgência artificial, sem anexos.",
+        "detailed": "Depois de tantos ataques elaborados, vale lembrar: a maioria dos e-mails do dia a dia é normal. Este não pede nada fora do comum, não tem anexo nem link externo, e vem de um endereço confirmado. Desconfiar de todo e-mail como se fosse ataque também custa. A ideia é reconhecer o padrão, não desconfiar de tudo.",
+        "conceptGlossaryId": "phishing_urgencia"
+      },
+      "idealInvestigationSeconds": 8
+    },
+    {
+      "id": "d6-e04",
+      "dayId": "day-06",
+      "order": 3,
+      "subject": "Revisão da planilha de ajuste salarial - só entre nós",
+      "bodyHtml": "<p>Oi! Vi que você trabalha com a Camila no financeiro. Ela me passou seu contato e pediu pra eu te enviar essa planilha de ajuste salarial do time pra você dar uma conferida antes de irmos pra diretoria. É bem sigiloso ainda, não comenta com ninguém.</p>",
+      "sender": {
+        "displayName": "Beatriz Nogueira (Consultoria RH)",
+        "emailAddressRaw": "beatriz.nogueira@rh-consultoria-parceira.com",
+        "domain": "rh-consultoria-parceira.com",
+        "isSpoofed": true,
+        "spoofType": "display_name_spoof"
+      },
+      "links": [],
+      "attachments": [
+        {
+          "id": "d6-e04-att1",
+          "fileName": "ajuste_salarial_time.xlsm",
+          "declaredExtension": ".xlsm",
+          "actualType": "application/vnd.ms-excel.sheet.macroEnabled",
+          "sizeKB": 210,
+          "hasMacro": true,
+          "isMalicious": true,
+          "sandboxResult": {
+            "outcome": "registry_change",
+            "key": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+          }
+        }
+      ],
+      "headers": {
+        "fromServer": "mail.rh-consultoria-parceira.com",
+        "sourceIp": "45.140.17.201",
+        "spf": "fail",
+        "dkim": "none",
+        "dmarc": "fail",
+        "sentAt": "2026-08-12T10:15:00Z",
+        "routeHops": ["45.140.17.201"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "never_used",
+        "notes": "Nenhuma consultoria de RH com esse nome está registrada como parceira ativa da empresa."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "anexo_perigoso",
+      "tags": ["anexo_perigoso", "malware", "engenharia_social", "phishing"],
+      "difficulty": 7,
+      "investigationHints": [
+        {
+          "toolId": "attachment_analysis",
+          "revealsField": "attachments[0].hasMacro",
+          "summaryText": "A planilha traz um programa embutido, que roda assim que você abre o arquivo."
+        },
+        {
+          "toolId": "sandbox_execution",
+          "revealsField": "attachments[0].sandboxResult",
+          "summaryText": "Em sandbox, o arquivo altera uma chave de registro usada para rodar programas automaticamente ao ligar o computador."
+        },
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "Não existe parceria ativa com essa consultoria — o nome e o contexto (Camila do financeiro) foram inventados para parecer familiar."
+        }
+      ],
+      "explanation": {
+        "short": "Golpe sob medida: cita uma colega de verdade para ganhar confiança, com planilha perigosa.",
+        "detailed": "Este é um ataque sob medida: o golpista pesquisou dados reais da empresa (o nome de uma colega do financeiro) para parecer de verdade e pedir segredo — o que também impede a vítima de confirmar com outras pessoas. O anexo é uma planilha que, ao abrir, pede para 'habilitar conteúdo': é aí que o programa perigoso roda. O teste confirma que ele se instala para rodar sempre que o computador liga.",
+        "conceptGlossaryId": "anexo_perigoso"
+      },
+      "idealInvestigationSeconds": 18
+    },
+    {
+      "id": "d6-e06",
+      "dayId": "day-06",
+      "order": 4,
+      "subject": "Última cobrança - PIX pendente do contrato de manutenção",
+      "bodyHtml": "<p>Prezados,</p><p>Esta é nossa última tentativa de contato antes de suspendermos o contrato de manutenção. Por favor, efetue o PIX de R$12.400 referente às últimas 2 faturas em aberto para a chave abaixo ainda hoje.</p><p>Chave PIX: 28.410.manutencao@quickpay.com.br</p>",
+      "sender": {
+        "displayName": "Financeiro Fornecedor ABC",
+        "emailAddressRaw": "financeiro@fornecedorabc.com",
+        "domain": "fornecedorabc.com",
+        "isSpoofed": false,
+        "spoofType": "compromised_legit"
+      },
+      "links": [],
+      "attachments": [],
+      "certificate": {
+        "companyName": "Fornecedor ABC LTDA",
+        "issuer": "Let's Encrypt",
+        "validFrom": "2026-06-01T00:00:00Z",
+        "validTo": "2026-09-01T00:00:00Z",
+        "domain": "fornecedorabc.com",
+        "isTechnicallyValid": true,
+        "isTrustworthy": false
+      },
+      "headers": {
+        "fromServer": "mail.fornecedorabc.com",
+        "sourceIp": "201.45.12.9",
+        "spf": "pass",
+        "dkim": "pass",
+        "dmarc": "pass",
+        "sentAt": "2026-08-12T16:30:00Z",
+        "routeHops": ["201.45.12.9"]
+      },
+      "internalDbRecord": {
+        "senderStatus": "trusted_vendor",
+        "notes": "Fornecedor real, mas o contrato de manutenção sempre foi pago via boleto, nunca por PIX."
+      },
+      "outOfBandCheck": {
+        "channelDescription": "Ligação para o contato financeiro já conhecido do Fornecedor ABC",
+        "outcome": "confirmed_fraud",
+        "details": "O fornecedor confirmou que não enviou essa cobrança e que sempre recebe por boleto — a conta de email foi comprometida novamente."
+      },
+      "riskLevel": "malicious",
+      "correctAction": "report",
+      "primaryConcept": "pix_falso",
+      "tags": ["pix_falso", "fornecedor_comprometido", "bec"],
+      "difficulty": 7,
+      "investigationHints": [
+        {
+          "toolId": "internal_db_lookup",
+          "revealsField": "internalDbRecord",
+          "summaryText": "Esse fornecedor sempre foi pago por boleto — nunca por PIX. Mudança de forma de pagamento é bandeira vermelha."
+        },
+        {
+          "toolId": "out_of_band_verify",
+          "revealsField": "outOfBandCheck",
+          "summaryText": "O fornecedor confirmou por telefone que não enviou essa cobrança e que a conta foi comprometida de novo."
+        }
+      ],
+      "explanation": {
+        "short": "Mesma conta real do fornecedor, comprometida de novo — mudança na forma de pagamento denuncia a fraude.",
+        "detailed": "Depois do primeiro e-mail deste mesmo dia, em que uma troca de sistema tinha explicação de verdade, é tentador aceitar qualquer coisa desse fornecedor sem conferir — mas cada e-mail precisa ser julgado sozinho. Aqui o sinal mais forte não está no computador, está no comportamento: esse contrato sempre foi pago por boleto, e agora pedem PIX, com pressa de 'última cobrança'. A confirmação por telefone revela que é a mesma conta comprometida de antes, atacando de novo com um pretexto diferente.",
+        "conceptGlossaryId": "pix_falso"
+      },
+      "idealInvestigationSeconds": 16
+    }
+  ]
+}

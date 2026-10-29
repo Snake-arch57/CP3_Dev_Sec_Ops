@@ -1,0 +1,170 @@
+[
+  {
+    "id": "quiz-01",
+    "question": "An email asks you to click a link to 'avoid your account being blocked in 24 hours.' What does this indicate?",
+    "options": [
+      "It's always legitimate, accounts really do get blocked quickly",
+      "Forced pressure is a classic scam technique",
+      "It's only a scam if it comes from an unknown sender",
+      "It doesn't indicate anything, it's just a writing style"
+    ],
+    "correctIndex": 1,
+    "concept": "engenharia_social",
+    "difficulty": 1,
+    "explanation": "Creating pressure so you act without thinking is a classic scam tactic."
+  },
+  {
+    "id": "quiz-03",
+    "question": "You receive an urgent wire transfer request from the 'finance director' by email, asking for secrecy. What should you do?",
+    "options": [
+      "Make the transfer quickly so as not to inconvenience the director",
+      "Reply to the email asking for more details",
+      "Confirm through another channel (a known phone number) before any payment",
+      "Forward it to a colleague to decide"
+    ],
+    "correctIndex": 2,
+    "concept": "pix_falso",
+    "difficulty": 3,
+    "explanation": "An urgent, secret payment request is the mark of the fake-payment scam — always confirm through another channel."
+  },
+  {
+    "id": "quiz-04",
+    "question": "Why should you never turn off two-step verification at an email's request?",
+    "options": [
+      "Because two-step verification is optional and makes no difference",
+      "Because it removes one of the main protections against account takeover",
+      "Because it only works on Android phones",
+      "Because turning off two-step verification is illegal"
+    ],
+    "correctIndex": 1,
+    "concept": "mfa",
+    "difficulty": 2,
+    "explanation": "Two-step verification is one of the best defenses against account takeover — a real IT team never asks you to turn it off."
+  },
+  {
+    "id": "quiz-05",
+    "question": "A file named 'invoice.pdf.exe' was sent as an attachment. What does this indicate?",
+    "options": [
+      "It's a password-protected PDF",
+      "Two file endings stuck together, hiding a dangerous program",
+      "It's a valid compression format",
+      "Nothing is wrong, it's just a long file name"
+    ],
+    "correctIndex": 1,
+    "concept": "anexo_perigoso",
+    "difficulty": 1,
+    "explanation": "The file ends in '.exe', which means program. The '.pdf' before it is only there to fool you."
+  },
+  {
+    "id": "quiz-06",
+    "question": "A padlock (secure connection) on a website means:",
+    "options": [
+      "The site is 100% trustworthy and safe",
+      "The conversation with the site is scrambled, but that says nothing about whether the site is honest",
+      "The site belongs to the government",
+      "No scams are possible on that site"
+    ],
+    "correctIndex": 1,
+    "concept": "phishing",
+    "difficulty": 3,
+    "explanation": "The padlock only guarantees the connection is secure — a fake site can have a padlock too."
+  },
+  {
+    "id": "quiz-07",
+    "question": "You find an unknown flash drive in the company parking lot. What should you do?",
+    "options": [
+      "Plug it into your computer to see what's on it",
+      "Hand it to the IT team without plugging it into any device",
+      "Take it home and check it at your leisure",
+      "Leave it where it was"
+    ],
+    "correctIndex": 1,
+    "concept": "usb_infectado",
+    "difficulty": 2,
+    "explanation": "Unknown flash drives may be intentionally infected — never plug them in, hand them over to IT."
+  },
+  {
+    "id": "quiz-09",
+    "question": "A real, trusted supplier asks, only by email, to change their payment bank details. What might this indicate?",
+    "options": [
+      "It's routine, suppliers change banks all the time",
+      "The supplier's email account may have been compromised",
+      "There's no risk, since the supplier is known",
+      "You need to reply immediately confirming it"
+    ],
+    "correctIndex": 1,
+    "concept": "fornecedor_comprometido",
+    "difficulty": 3,
+    "explanation": "Even real suppliers can have their email accounts hijacked — confirm bank detail changes by phone."
+  },
+  {
+    "id": "quiz-10",
+    "question": "Before scanning an unknown QR code, what is recommended?",
+    "options": [
+      "Scan it and see what happens",
+      "See where the link really goes before opening it",
+      "Share it with a colleague first",
+      "QR codes are always safe"
+    ],
+    "correctIndex": 1,
+    "concept": "qr_falso",
+    "difficulty": 1,
+    "explanation": "You can preview a QR code's link before accessing it, avoiding disguised scams."
+  },
+  {
+    "id": "quiz-12",
+    "question": "Why should an address like 'microsoft-support-verification.com' raise suspicion?",
+    "options": [
+      "Because it's too long",
+      "Because it's not Microsoft's official address, it just has the word 'microsoft' in it",
+      "Because it uses a hyphen",
+      "Addresses like this are always from real partners"
+    ],
+    "correctIndex": 1,
+    "concept": "microsoft_falso",
+    "difficulty": 2,
+    "explanation": "Having a brand name doesn't make an address official — anyone can create an address like this."
+  },
+  {
+    "id": "quiz-13",
+    "question": "What's the best practice when receiving an invoice by email, even from a known supplier?",
+    "options": [
+      "Pay immediately to avoid interest charges",
+      "Check the payee and bank details before paying",
+      "Forward it to finance without checking anything",
+      "Always ignore invoices sent by email"
+    ],
+    "correctIndex": 1,
+    "concept": "boleto_adulterado",
+    "difficulty": 3,
+    "explanation": "Invoices can have the payee altered even when coming from a real supplier — always check before paying."
+  },
+  {
+    "id": "quiz-15",
+    "question": "Which of these is a good password practice?",
+    "options": [
+      "Using the same password on every system so you don't forget it",
+      "Using long, unique passwords per service, ideally with a password manager",
+      "Swapping '123456' for 'password123' every so often",
+      "Sharing the password only with trusted colleagues"
+    ],
+    "correctIndex": 1,
+    "concept": "senha_fraca",
+    "difficulty": 1,
+    "explanation": "Unique, long passwords per service, managed by a password manager, drastically reduce the risk of a cascading breach."
+  },
+  {
+    "id": "quiz-18",
+    "question": "What should you do if you suspect an email is a scam, even without total certainty?",
+    "options": [
+      "Delete it without telling anyone",
+      "Tell the company security team",
+      "Reply to the sender asking if it's real",
+      "Forward it to several colleagues asking for their opinion"
+    ],
+    "correctIndex": 1,
+    "concept": "phishing",
+    "difficulty": 1,
+    "explanation": "Reporting allows the security team to analyze it and protect other employees from the same scam."
+  }
+]

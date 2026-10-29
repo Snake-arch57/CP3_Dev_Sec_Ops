@@ -1,0 +1,22 @@
+# Normaliza fim de linha nos arquivos de texto, independente do sistema.
+* text=auto
+
+# Binários: nunca converter fim de linha, sob pena de corromper o arquivo.
+# O repositório é trabalhado no Windows, onde a conversão LF->CRLF é o padrão.
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.mp3   binary
+*.ogg   binary
+*.wav   binary
+
+# Recursos do Godot que são binários apesar da extensão de texto.
+*.import binary
